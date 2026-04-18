@@ -181,30 +181,36 @@ OrgChart.templates.green.field_1 = `
 
 // INIT CHART
 var chart = new OrgChart(document.getElementById("tree"), {
-    chart.on('showDetails', function(sender, args){
-    setTimeout(() => {
-        const header = document.querySelector('.boc-header');
-        if(header){
-            header.style.background = '#2e7d32';
-        }
-    }, 10);
-});  
-  nodeMenu: {
-  details: { text: "Detail" }
-},
-
-nodeMenuButton: {
-  icon: OrgChart.icon.menu(24, 24, '#ffffff')
-},
     template: "green",
     enableSearch: true,
     nodeMouseClick: OrgChart.action.details,
     mouseScrool: OrgChart.action.zoom,
+
+    nodeMenu: {
+      details: { text: "Detail" }
+    },
+
+    nodeMenuButton: {
+      icon: OrgChart.icon.menu(24, 24, '#ffffff')
+    },
+
     nodeBinding: {
         field_0: "name",
         field_1: "title",
         img_0: "img"
     },
+
+    nodes: [ /* data Anda */ ]
+});
+
+  chart.on('showDetails', function(sender, args){
+    setTimeout(() => {
+        const header = document.querySelector('.boc-header');
+        if(header){
+            header.style.background = '#2e7d32';
+        }
+    }, 50);
+});
 
     nodes: [
 
