@@ -97,11 +97,13 @@ OrgChart.templates.green.field_1 = `
   {val}
   </text>
 `;
+  
 // INIT CHART
 var chart = new OrgChart(document.getElementById("tree"), {
-    template: "green",
+    template: "olivia",
     enableSearch: true,
     mouseScrool: OrgChart.action.zoom,
+
     nodeBinding: {
         field_0: "name",
         field_1: "title",
@@ -112,20 +114,31 @@ var chart = new OrgChart(document.getElementById("tree"), {
 
         { id: 1, name: "Kepala Puskesmas", title: "dr. H. Yatino", img: "https://i.pravatar.cc/150?img=1" },
 
-        { id: 10, pid: 1, name: "PJ Klaster 1", title: "Rian Prasetiyo", img: "https://i.pravatar.cc/150?img=2" },
-        { id: 11, pid: 10, name: "Koordinator TU", title: "Cahyu Dana", img: "https://i.pravatar.cc/150?img=3" },
-        { id: 12, pid: 10, name: "Koordinator SDM", title: "Siti Nurul", img: "https://i.pravatar.cc/150?img=4" },
-        { id: 13, pid: 10, name: "Koordinator Manajemen", title: "M. Taufik", img: "https://i.pravatar.cc/150?img=5" },
+        { id: 10, pid: 1, name: "PJ Klaster 1 (Manajemen)", title: "Rian Prasetiyo", img: "https://i.pravatar.cc/150?img=2" },
+        { id: 11, pid: 10, name: "Koordinator TU", title: "Cahyu Dana Safitri", img: "https://i.pravatar.cc/150?img=3" },
+        { id: 12, pid: 10, name: "Koordinator SDM", title: "Siti Nurul Hidayah", img: "https://i.pravatar.cc/150?img=4" },
+        { id: 13, pid: 10, name: "Koordinator Manajemen", title: "Muhammad Taufik Mubarok", img: "https://i.pravatar.cc/150?img=5" },
+        { id: 14, pid: 10, name: "Koordinator Mutu", title: "Happy Hartaning", img: "https://i.pravatar.cc/150?img=6" },
+        { id: 15, pid: 10, name: "Koordinator Jejaring", title: "Sri Kusmini", img: "https://i.pravatar.cc/150?img=7" },
+        { id: 16, pid: 10, name: "Koordinator Sistem Informasi", title: "Winarni", img: "https://i.pravatar.cc/150?img=8" },
 
-        { id: 20, pid: 1, name: "PJ Klaster 2", title: "Retno Suciati", img: "https://i.pravatar.cc/150?img=6" },
-        { id: 21, pid: 20, name: "Koordinator Ibu", title: "Ririn", img: "https://i.pravatar.cc/150?img=7" },
-        { id: 22, pid: 20, name: "Koordinator Balita", title: "Denny", img: "https://i.pravatar.cc/150?img=8" },
+        { id: 20, pid: 1, name: "PJ Klaster 2 (Ibu & Anak)", title: "Retno Suciati", img: "https://i.pravatar.cc/150?img=9" },
+        { id: 21, pid: 20, name: "Koordinator Ibu Hamil", title: "Ririn Widiyanti", img: "https://i.pravatar.cc/150?img=10" },
+        { id: 22, pid: 20, name: "Koordinator Balita", title: "Denny Ratna", img: "https://i.pravatar.cc/150?img=11" },
+        { id: 23, pid: 20, name: "Koordinator Remaja", title: "Ike Sukasih", img: "https://i.pravatar.cc/150?img=12" },
 
-        { id: 30, pid: 1, name: "PJ Klaster 3", title: "dr. Mualimatul", img: "https://i.pravatar.cc/150?img=9" },
+        { id: 30, pid: 1, name: "PJ Klaster 3 (Dewasa & Lansia)", title: "dr. Mualimatul", img: "https://i.pravatar.cc/150?img=13" },
+        { id: 31, pid: 30, name: "Koordinator Dewasa", title: "Ayu Dwi Sefterina", img: "https://i.pravatar.cc/150?img=14" },
+        { id: 32, pid: 30, name: "Koordinator Lansia", title: "Apit Widyastuti", img: "https://i.pravatar.cc/150?img=15" },
 
-        { id: 40, pid: 1, name: "PJ Klaster 4", title: "Bekti Prasetyo", img: "https://i.pravatar.cc/150?img=10" },
+        { id: 40, pid: 1, name: "PJ Klaster 4 (Penyakit Menular)", title: "Ns. Bekti Prasetyo", img: "https://i.pravatar.cc/150?img=16" },
+        { id: 41, pid: 40, name: "Koordinator Kesling", title: "Danik Fachrudin", img: "https://i.pravatar.cc/150?img=17" },
+        { id: 42, pid: 40, name: "Koordinator Surveilans", title: "Dimas Agus", img: "https://i.pravatar.cc/150?img=18" },
 
-        { id: 50, pid: 1, name: "PJ Klaster 5", title: "dr. Jenny", img: "https://i.pravatar.cc/150?img=11" }
+        { id: 50, pid: 1, name: "PJ Klaster 5 (Lintas Klaster)", title: "dr. Jenny Prima", img: "https://i.pravatar.cc/150?img=19" },
+        { id: 51, pid: 50, name: "Koordinator Gawat Darurat", title: "Dimas Agus", img: "https://i.pravatar.cc/150?img=20" },
+        { id: 52, pid: 50, name: "Koordinator Lab", title: "Ginuk Ari", img: "https://i.pravatar.cc/150?img=21" },
+        { id: 53, pid: 50, name: "Koordinator Farmasi", title: "Sofa Rohmaniyah", img: "https://i.pravatar.cc/150?img=22" }
 
     ]
 });
