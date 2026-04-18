@@ -131,68 +131,12 @@ img[style*="border-radius"] {
 
 <script>
 
-// TEMPLATE CUSTOM
-OrgChart.templates.green = Object.assign({}, OrgChart.templates.ana);
-
-OrgChart.templates.green.size = [300, 110];
-
-OrgChart.templates.green.node = `
-  <rect x="0" y="0" width="300" height="110" rx="10" ry="10"
-  fill="#2e7d32" stroke="#1b5e20" stroke-width="2"></rect>
-`;
-
-OrgChart.templates.green.img_0 = `
-  <clipPath id="{randId}">
-    <circle cx="45" cy="45" r="30"></circle>
-  </clipPath>
-  <image x="15" y="15" width="60" height="60" preserveAspectRatio="xMidYMid slice"
-  clip-path="url(#{randId})" xlink:href="{val}"></image>
-`;
-
-OrgChart.templates.green.field_0 = `
-  <foreignObject x="90" y="15" width="140" height="35">
-    <div xmlns="http://www.w3.org/1999/xhtml"
-      style="
-        font-size:13px;
-        color:white;
-        font-weight:700;
-        text-align:center;
-        line-height:1.2;
-        word-wrap:break-word;">
-      {val}
-    </div>
-  </foreignObject>
-`;
-
-OrgChart.templates.green.field_1 = `
-  <foreignObject x="90" y="55" width="140" height="30">
-    <div xmlns="http://www.w3.org/1999/xhtml"
-      style="
-        font-size:12px;
-        color:#e8f5e9;
-        font-weight:600;
-        text-align:center;
-        line-height:1.2;
-        word-wrap:break-word;">
-      {val}
-    </div>
-  </foreignObject>
-`;
-
-// INIT CHART
+// INIT CHART (VERSI STABIL)
 var chart = new OrgChart(document.getElementById("tree"), {
-    template: "green",
+    template: "olivia", // pakai default dulu biar stabil
     enableSearch: true,
     nodeMouseClick: OrgChart.action.details,
     mouseScrool: OrgChart.action.zoom,
-
-    nodeMenu: {
-      details: { text: "Detail" }
-    },
-
-    nodeMenuButton: {
-      icon: OrgChart.icon.menu(24, 24, '#ffffff')
-    },
 
     nodeBinding: {
         field_0: "name",
@@ -202,58 +146,36 @@ var chart = new OrgChart(document.getElementById("tree"), {
 
     nodes: [
 
-        // KEPALA
         { id: 1, name: "Kepala Puskesmas", title: "dr. H. Yatino", img: "https://i.pravatar.cc/150?img=1" },
 
-        // KLASTER 1
         { id: 10, pid: 1, name: "PJ Klaster 1 (Manajemen)", title: "Rian Prasetiyo", img: "https://i.pravatar.cc/150?img=2" },
-
         { id: 11, pid: 10, name: "Koordinator TU", title: "Cahyu Dana Safitri", img: "https://i.pravatar.cc/150?img=3" },
         { id: 12, pid: 10, name: "Koordinator SDM", title: "Siti Nurul Hidayah", img: "https://i.pravatar.cc/150?img=4" },
-        { id: 13, pid: 10, name: "Koordinator Manajemen", title: "Muhammad Taufik Mubarok", img: "https://i.pravatar.cc/150?img=5" },
-        { id: 14, pid: 10, name: "Koordinator Mutu & Keselamatan", title: "Happy Hartaning", img: "https://i.pravatar.cc/150?img=6" },
-        { id: 15, pid: 10, name: "Koordinator Jejaring", title: "Sri Kusmini", img: "https://i.pravatar.cc/150?img=7" },
-        { id: 16, pid: 10, name: "Koordinator Sistem Informasi", title: "Winarni", img: "https://i.pravatar.cc/150?img=8" },
 
-        // KLASTER 2
-        { id: 20, pid: 1, name: "PJ Klaster 2 (Ibu & Anak)", title: "Retno Suciati", img: "https://i.pravatar.cc/150?img=9" },
+        { id: 20, pid: 1, name: "PJ Klaster 2 (Ibu & Anak)", title: "Retno Suciati", img: "https://i.pravatar.cc/150?img=5" },
 
-        { id: 21, pid: 20, name: "Koordinator Ibu Hamil", title: "Ririn Widiyanti", img: "https://i.pravatar.cc/150?img=10" },
-        { id: 22, pid: 20, name: "Koordinator Balita", title: "Denny Ratna", img: "https://i.pravatar.cc/150?img=11" },
-        { id: 23, pid: 20, name: "Koordinator Remaja", title: "Ike Sukasih", img: "https://i.pravatar.cc/150?img=12" },
-
-        // KLASTER 3
-        { id: 30, pid: 1, name: "PJ Klaster 3 (Dewasa & Lansia)", title: "dr. Mualimatul", img: "https://i.pravatar.cc/150?img=13" },
-
-        { id: 31, pid: 30, name: "Koordinator Dewasa", title: "Ayu Dwi Sefterina", img: "https://i.pravatar.cc/150?img=14" },
-        { id: 32, pid: 30, name: "Koordinator Lansia", title: "Apit Widyastuti", img: "https://i.pravatar.cc/150?img=15" },
-
-        // KLASTER 4
-        { id: 40, pid: 1, name: "PJ Klaster 4 (Penyakit Menular)", title: "Ns. Bekti Prasetyo", img: "https://i.pravatar.cc/150?img=16" },
-
-        { id: 41, pid: 40, name: "Koordinator Kesling", title: "Danik Fachrudin", img: "https://i.pravatar.cc/150?img=17" },
-        { id: 42, pid: 40, name: "Koordinator Surveilans", title: "Dimas Agus", img: "https://i.pravatar.cc/150?img=18" },
-
-        // KLASTER 5
-        { id: 50, pid: 1, name: "PJ Klaster 5 (Lintas Klaster)", title: "dr. Jenny Prima", img: "https://i.pravatar.cc/150?img=19" },
-
-        { id: 51, pid: 50, name: "Koordinator Gawat Darurat", title: "Dimas Agus", img: "https://i.pravatar.cc/150?img=20" },
-        { id: 52, pid: 50, name: "Koordinator Lab", title: "Ginuk Ari", img: "https://i.pravatar.cc/150?img=21" },
-        { id: 53, pid: 50, name: "Koordinator Farmasi", title: "Sofa Rohmaniyah", img: "https://i.pravatar.cc/150?img=22" }
-
+        { id: 30, pid: 1, name: "PJ Klaster 3 (Dewasa & Lansia)", title: "dr. Mualimatul", img: "https://i.pravatar.cc/150?img=6" }
 
     ]
 });
 
-chart.on('showDetails', function(sender, args){
+// UBAH WARNA POPUP (CARA AMAN)
+chart.on('showDetails', function(){
     setTimeout(() => {
-        const headers = document.querySelectorAll('.boc-header');
-        headers.forEach(h => {
-            h.style.background = '#2e7d32';
+
+        // header
+        document.querySelectorAll('.boc-header').forEach(el=>{
+            el.style.background = '#2e7d32';
         });
+
+        // tombol
+        document.querySelectorAll('.boc-button').forEach(el=>{
+            el.style.background = '#2e7d32';
+        });
+
     }, 100);
 });
-</script>
 
+</script>
 </body>
 </html>
