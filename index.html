@@ -134,10 +134,10 @@ img[style*="border-radius"] {
 // TEMPLATE CUSTOM
 OrgChart.templates.green = Object.assign({}, OrgChart.templates.ana);
 
-OrgChart.templates.green.size = [270, 100];
+OrgChart.templates.green.size = [300, 110];
 
 OrgChart.templates.green.node = `
-  <rect x="0" y="0" width="250" height="90" rx="10" ry="10"
+  <rect x="0" y="0" width="300" height="110" rx="10" ry="10"
   fill="#2e7d32" stroke="#1b5e20" stroke-width="2"></rect>
 `;
 
@@ -247,11 +247,11 @@ var chart = new OrgChart(document.getElementById("tree"), {
 
 chart.on('showDetails', function(sender, args){
     setTimeout(() => {
-        const header = document.querySelector('.boc-header');
-        if(header){
-            header.style.background = '#2e7d32';
-        }
-    }, 50);
+        const headers = document.querySelectorAll('.boc-header');
+        headers.forEach(h => {
+            h.style.background = '#2e7d32';
+        });
+    }, 100);
 });
 </script>
 
