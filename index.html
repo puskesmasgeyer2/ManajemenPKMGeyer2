@@ -59,38 +59,44 @@ h2 {
 
 <script>
 
-// TEMPLATE CUSTOM
+// TEMPLATE CUSTOM BARU
 OrgChart.templates.green = Object.assign({}, OrgChart.templates.ana);
 
-OrgChart.templates.green.size = [250, 90];
+// Ukuran diperbesar
+OrgChart.templates.green.size = [300, 100];
 
+// BOX UTAMA (border tebal & tegas)
 OrgChart.templates.green.node = `
-  <rect x="0" y="0" width="250" height="90" rx="10" ry="10"
-  fill="#2e7d32" stroke="#1b5e20" stroke-width="2"></rect>
+  <rect x="0" y="0" width="300" height="100" rx="12" ry="12"
+  fill="#2e7d32" stroke="#0d3b1e" stroke-width="3"></rect>
 `;
 
+// FOTO
 OrgChart.templates.green.img_0 = `
   <clipPath id="{randId}">
-    <circle cx="45" cy="45" r="30"></circle>
+    <circle cx="55" cy="50" r="32"></circle>
   </clipPath>
-  <image x="15" y="15" width="60" height="60" preserveAspectRatio="xMidYMid slice"
-  clip-path="url(#{randId})" xlink:href="{val}"></image>
+  <image x="20" y="18" width="64" height="64"
+  preserveAspectRatio="xMidYMid slice"
+  clip-path="url(#{randId})"
+  xlink:href="{val}"></image>
 `;
 
+// JABATAN (lebih tegas)
 OrgChart.templates.green.field_0 = `
-  <text x="130" y="35" text-anchor="middle"
-  style="font-size:14px;fill:#ffffff;font-weight:bold;">
+  <text x="170" y="40" text-anchor="middle"
+  style="font-size:15px;fill:#ffffff;font-weight:700;">
   {val}
   </text>
 `;
 
+// NAMA (lebih kontras)
 OrgChart.templates.green.field_1 = `
-  <text x="130" y="60" text-anchor="middle"
-  style="font-size:12px;fill:#e8f5e9;">
+  <text x="170" y="68" text-anchor="middle"
+  style="font-size:13px;fill:#e8f5e9;font-weight:600;">
   {val}
   </text>
 `;
-
 // INIT CHART
 var chart = new OrgChart(document.getElementById("tree"), {
     template: "green",
