@@ -200,18 +200,6 @@ var chart = new OrgChart(document.getElementById("tree"), {
         img_0: "img"
     },
 
-    nodes: [ });
-
-  chart.on('showDetails', function(sender, args){
-    setTimeout(() => {
-        const header = document.querySelector('.boc-header');
-        if(header){
-            header.style.background = '#2e7d32';
-        }
-    }, 50);
-});
- ]
-
     nodes: [
 
         // KEPALA
@@ -257,6 +245,14 @@ var chart = new OrgChart(document.getElementById("tree"), {
     ]
 });
 
+chart.on('showDetails', function(sender, args){
+    setTimeout(() => {
+        const header = document.querySelector('.boc-header');
+        if(header){
+            header.style.background = '#2e7d32';
+        }
+    }, 50);
+});
 </script>
 
 </body>
