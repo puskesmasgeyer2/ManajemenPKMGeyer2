@@ -44,44 +44,54 @@ h2 {
   box-shadow: 0 3px 10px rgba(0,0,0,0.08);
 }
 
-/* ===== POPUP DETAIL (ORGCHART) ===== */
+/* ===== POPUP DETAIL (FIXED) ===== */
 
-/* Header popup */
-.boc-card .boc-header {
+/* HEADER (bagian biru atas) */
+.boc-card .boc-header,
+.boc-header {
   background: #2e7d32 !important;
   color: white !important;
 }
 
-/* Foto lingkaran */
-.boc-card .boc-avatar {
+/* Avatar lingkaran */
+.boc-card .boc-avatar,
+.boc-avatar {
   border: 4px solid #2e7d32 !important;
 }
 
-/* Tombol (edit, share, pdf) */
-.boc-card .boc-btn {
+/* Tombol bulat */
+.boc-card .boc-button,
+.boc-button {
   background: #2e7d32 !important;
   color: white !important;
 }
 
 /* Hover tombol */
-.boc-card .boc-btn:hover {
+.boc-button:hover {
   background: #1b5e20 !important;
 }
 
 /* Background isi */
-.boc-card .boc-body {
+.boc-card,
+.boc-body {
   background: #f1f8f4 !important;
 }
 
-/* Text label kecil (name/title/img) */
+/* Label kecil (name/title/img) */
 .boc-card .boc-label {
   color: #1b5e20 !important;
   font-weight: 600;
 }
 
-/* Text isi */
+/* Value */
 .boc-card .boc-value {
   color: #333 !important;
+}
+
+/* SHADOW biar lebih halus */
+.boc-card {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15) !important;
+  border-radius: 12px !important;
 }
 </style>
 </head>
