@@ -78,17 +78,33 @@ OrgChart.templates.green.img_0 = `
 `;
 
 OrgChart.templates.green.field_0 = `
-  <text x="130" y="35" text-anchor="middle"
-  style="font-size:14px;fill:#ffffff;font-weight:bold;">
-  {val}
-  </text>
+  <foreignObject x="90" y="15" width="140" height="35">
+    <div xmlns="http://www.w3.org/1999/xhtml"
+      style="
+        font-size:13px;
+        color:white;
+        font-weight:700;
+        text-align:center;
+        line-height:1.2;
+        word-wrap:break-word;">
+      {val}
+    </div>
+  </foreignObject>
 `;
 
 OrgChart.templates.green.field_1 = `
-  <text x="130" y="60" text-anchor="middle"
-  style="font-size:12px;fill:#e8f5e9;">
-  {val}
-  </text>
+  <foreignObject x="90" y="55" width="140" height="30">
+    <div xmlns="http://www.w3.org/1999/xhtml"
+      style="
+        font-size:12px;
+        color:#e8f5e9;
+        font-weight:600;
+        text-align:center;
+        line-height:1.2;
+        word-wrap:break-word;">
+      {val}
+    </div>
+  </foreignObject>
 `;
 
 // INIT CHART
