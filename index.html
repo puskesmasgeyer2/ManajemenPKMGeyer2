@@ -213,20 +213,15 @@ var chart = new OrgChart(document.getElementById("tree"), {
     ]
 });
 
-chart.on('nodeClick', function(sender, args){
-    const data = args.node.data;
+chart.on('showDetails', function(sender, args){
+    setTimeout(() => {
+        document.querySelectorAll('.boc-field-label').forEach(el => {
+            let text = el.innerText.trim().toLowerCase();
 
-    document.getElementById("popupImg").src = data.img || "logo.png";
-    document.getElementById("popupName").innerText = data.name || "-";
-    document.getElementById("popupTitle").innerText = data.title || "-";
-
-    document.getElementById("popupNama").innerText = data.name || "-";
-    document.getElementById("popupPangkat").innerText = data.pangkat || "-";
-    document.getElementById("popupJabatan").innerText = data.jabatan || "-";
-    document.getElementById("popupStatus").innerText = data.status || "-";
-    document.getElementById("popupTugas").innerText = data.tugas || "-";
-
-    document.getElementById("popup").style.display = "block";
+            if(text === "name") el.innerText = "Jabatan Pelaksana";
+            if(text === "title") el.innerText = "Nama Lengkap";
+        });
+    }, 50);
 });
   
 function closePopup(){
