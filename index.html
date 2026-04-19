@@ -216,7 +216,6 @@ var chart = new OrgChart(document.getElementById("tree"), {
 
 chart.on('click', function(sender, args){
     const data = args.node.data;
-    if(!data) return;
 
     document.getElementById("popupImg").src = data.img || "logo.png";
 
