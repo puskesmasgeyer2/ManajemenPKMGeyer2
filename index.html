@@ -180,7 +180,7 @@ var chart = new OrgChart(document.getElementById("tree"), {
         { id: 11, pid: 10, name: "Koordinator Ketatausahaan", title: "Cahyu Dana Safitri, A.Md.Kep.", pangkat: "Pengatur Muda Tk. 1/II d", jabatan: "Perawat Terampil", status: "PNS", tugas: "Bendahara Penerimaan", img: "https://i.pravatar.cc/150?img=3" },
         { id: 12, pid: 10, name: "Koordinator SDM", title: "Siti Nurul Hidayah, S.K.M.", pangkat: "IX", jabatan: "Promotor Kesehatan Ahli Pertama", status: "PPPK", tugas: "Bendahara Barang Persediaan Non Obat", img: "https://i.pravatar.cc/150?img=4" },
         { id: 13, pid: 10, name: "Koordinator Manajemen", title: "apt. Muhammad Taufik Mubarok, S.Farm.", pangkat: "IX", jabatan: "Administrator Kesehatan Ahli Pertama", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=5" },
-        { id: 14, pid: 10, name: "Koordinator Mutu & Keselamatan Pasien", title: "Happy Hartaning Sandy, A.Md.Keb.", pangkat: "VII", jabatan: "Bidan Terampil", status: "PPPK", tugas: , img: "https://i.pravatar.cc/150?img=6" },
+        { id: 14, pid: 10, name: "Koordinator Mutu & Keselamatan Pasien", title: "Happy Hartaning Sandy, A.Md.Keb.", pangkat: "VII", jabatan: "Bidan Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=6" },
         { id: 15, pid: 10, name: "Koordinator Jejaring", title: "Sri Kusmini, A.Md.Keb.", pangkat: "Pengatur Muda Tk. 1/II d", jabatan: "Bidan Mahir", status: "PNS", tugas: "Bendahara BOK", img: "https://i.pravatar.cc/150?img=7" },
         { id: 16, pid: 10, name: "Koordinator Sistem Informasi", title: "Winarni, A.Md.RMIK.", pangkat: "VII", jabatan: "Perekam Medis Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=8" },
 
@@ -208,7 +208,7 @@ var chart = new OrgChart(document.getElementById("tree"), {
 
         { id: 51, pid: 50, name: "Koordinator Gawat Darurat", title: "Dimas Agus Saputro, A.Md.Kep.", pangkat: "VII", jabatan: "Perawat Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=20" },
         { id: 52, pid: 50, name: "Koordinator Lab", title: "Ginuk Ari Setiyoningrum, A.Md.A.K.", pangkat: "Pengatur Muda Tk. 1/II d", jabatan: "Pranata Laboratorium Kesehatan Terampil", status: "PNS", tugas: "Bendahara Barang Aset", img: "https://i.pravatar.cc/150?img=21" },
-        { id: 53, pid: 50, name: "Koordinator Farmasi", title: "apt. Sofa Rohmaniyah, S.Farm.", pangkat: "Penata Muda Tk. 1/III b", jabatan: "Apoteker Ahli Pertama", status: "PNS", tugas: "Bendahara Barang Persediaan Obat" img: "https://i.pravatar.cc/150?img=22" }
+        { id: 53, pid: 50, name: "Koordinator Farmasi", title: "apt. Sofa Rohmaniyah, S.Farm.", pangkat: "Penata Muda Tk. 1/III b", jabatan: "Apoteker Ahli Pertama", status: "PNS", tugas: "Bendahara Barang Persediaan Obat", img: "https://i.pravatar.cc/150?img=22" }
 
 
     ]
@@ -230,7 +230,6 @@ chart.on('click', function(sender, args){
 
     document.getElementById("popup").style.display = "block";
 });
-</script>
 
 function closePopup(){
     document.getElementById("popup").style.display = "none";
@@ -241,6 +240,7 @@ function closePopup(){
         closePopup();
     }
 });
+</script>
 
 </body>
 </html>
