@@ -214,7 +214,7 @@ var chart = new OrgChart(document.getElementById("tree"), {
     ]
 });
 
-chart.on('click', function(sender, args){
+chart.on('nodeClick', function(sender, args){
     const data = args.node.data;
 
     document.getElementById("popupImg").src = data.img || "logo.png";
@@ -222,7 +222,7 @@ chart.on('click', function(sender, args){
     document.getElementById("popupName").innerText = data.name || "-";
     document.getElementById("popupTitle").innerText = data.title || "-";
 
-    document.getElementById("popupNama").innerText = data.title || "-";
+    document.getElementById("popupNama").innerText = data.name || "-";
     document.getElementById("popupPangkat").innerText = data.pangkat || "-";
     document.getElementById("popupJabatan").innerText = data.jabatan || "-";
     document.getElementById("popupStatus").innerText = data.status || "-";
