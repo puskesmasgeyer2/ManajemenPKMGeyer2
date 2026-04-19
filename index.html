@@ -167,22 +167,7 @@ var chart = new OrgChart(document.getElementById("tree"), {
         field_1: "title",
         img_0: "img"
     },
-chart.on('showDetails', function(sender, args){
-    setTimeout(() => {
-        const labels = document.querySelectorAll('.boc-field-label');
-        labels.forEach(el => {
-            let text = el.innerText.toLowerCase();
-
-            if(text === "name") el.innerText = "Nama";
-            if(text === "title") el.innerText = "Jabatan";
-            if(text === "img") el.innerText = "Foto";
-            if(text === "pangkat") el.innerText = "Pangkat / Golongan";
-            if(text === "jabatan") el.innerText = "Jabatan Fungsional";
-            if(text === "status") el.innerText = "Status Pegawai";
-            if(text === "tugas") el.innerText = "Tugas Tambahan";
-        });
-    }, 50);
-});
+  
     nodes: [
 
         // KEPALA
@@ -232,7 +217,6 @@ chart.on('nodeClick', function(sender, args){
     const data = args.node.data;
 
     document.getElementById("popupImg").src = data.img || "logo.png";
-
     document.getElementById("popupName").innerText = data.name || "-";
     document.getElementById("popupTitle").innerText = data.title || "-";
 
@@ -244,7 +228,7 @@ chart.on('nodeClick', function(sender, args){
 
     document.getElementById("popup").style.display = "block";
 });
-
+  
 function closePopup(){
     document.getElementById("popup").style.display = "none";
 }
