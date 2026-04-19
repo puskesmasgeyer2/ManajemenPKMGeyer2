@@ -163,11 +163,26 @@ var chart = new OrgChart(document.getElementById("tree"), {
     enableSearch: true,
     mouseScrool: OrgChart.action.zoom,
     nodeBinding: {
-        field_0: "name",
-        field_1: "title",
+        field_0: "title",
+        field_1: "name",
         img_0: "img"
     },
+chart.on('showDetails', function(sender, args){
+    setTimeout(() => {
+        const labels = document.querySelectorAll('.boc-field-label');
+        labels.forEach(el => {
+            let text = el.innerText.toLowerCase();
 
+            if(text === "name") el.innerText = "Nama";
+            if(text === "title") el.innerText = "Jabatan";
+            if(text === "img") el.innerText = "Foto";
+            if(text === "pangkat") el.innerText = "Pangkat / Golongan";
+            if(text === "jabatan") el.innerText = "Jabatan Fungsional";
+            if(text === "status") el.innerText = "Status Pegawai";
+            if(text === "tugas") el.innerText = "Tugas Tambahan";
+        });
+    }, 50);
+});
     nodes: [
 
         // KEPALA
