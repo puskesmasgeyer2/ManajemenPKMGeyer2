@@ -163,79 +163,54 @@ var chart = new OrgChart(document.getElementById("tree"), {
     enableSearch: true,
     mouseScrool: OrgChart.action.zoom,
     nodeBinding: {
-        field_0: "name",
-        field_1: "title",
+        field_0: "Jabatan_Pelaksana",
+        field_1: "Nama_Lengkap",
         img_0: "img"
     },
   
     nodes: [
 
         // KEPALA
-        { id: 1, name: "Kepala Puskesmas", title: "dr. H. Yatino", pangkat: "Pembina Tk. 1/IV b", jabatan: "Dokter Ahli Madya", status: "PNS", tugas: "Kepala UPTD Puskesmas", img: "https://i.pravatar.cc/150?img=1" },
+        { id: 1, Jabatan_Pelaksana: "Kepala Puskesmas", Nama_Lengkap: "dr. H. Yatino", pangkat: "Pembina Tk. 1/IV b", jabatan: "Dokter Ahli Madya", status: "PNS", tugas: "Kepala UPTD Puskesmas", img: "https://i.pravatar.cc/150?img=1" },
 
         // KLASTER 1
-        { id: 10, pid: 1, name: "PJ Klaster 1 (Manajemen)", title: "Rian Prasetiyo Minardi, S.Farm.", pangkat: "Penata Muda Tk. 1/III b", jabatan: "Kepala Sub Bagian Tata Usaha", status: "PNS", tugas: "Pejabat Keuangan", img: "https://i.pravatar.cc/150?img=2" },
+        { id: 10, pid: 1, Jabatan_Pelaksana: "PJ Klaster 1 (Manajemen)", Nama_Lengkap: "Rian Prasetiyo Minardi, S.Farm.", pangkat: "Penata Muda Tk. 1/III b", jabatan: "Kepala Sub Bagian Tata Usaha", status: "PNS", tugas: "Pejabat Keuangan", img: "https://i.pravatar.cc/150?img=2" },
 
-        { id: 11, pid: 10, name: "Koordinator Ketatausahaan", title: "Cahyu Dana Safitri, A.Md.Kep.", pangkat: "Pengatur Muda Tk. 1/II d", jabatan: "Perawat Terampil", status: "PNS", tugas: "Bendahara Penerimaan", img: "https://i.pravatar.cc/150?img=3" },
-        { id: 12, pid: 10, name: "Koordinator SDM", title: "Siti Nurul Hidayah, S.K.M.", pangkat: "IX", jabatan: "Promotor Kesehatan Ahli Pertama", status: "PPPK", tugas: "Bendahara Barang Persediaan Non Obat", img: "https://i.pravatar.cc/150?img=4" },
-        { id: 13, pid: 10, name: "Koordinator Manajemen", title: "apt. Muhammad Taufik Mubarok, S.Farm.", pangkat: "IX", jabatan: "Administrator Kesehatan Ahli Pertama", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=5" },
-        { id: 14, pid: 10, name: "Koordinator Mutu & Keselamatan Pasien", title: "Happy Hartaning Sandy, A.Md.Keb.", pangkat: "VII", jabatan: "Bidan Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=6" },
-        { id: 15, pid: 10, name: "Koordinator Jejaring", title: "Sri Kusmini, A.Md.Keb.", pangkat: "Pengatur Muda Tk. 1/II d", jabatan: "Bidan Mahir", status: "PNS", tugas: "Bendahara BOK", img: "https://i.pravatar.cc/150?img=7" },
-        { id: 16, pid: 10, name: "Koordinator Sistem Informasi", title: "Winarni, A.Md.RMIK.", pangkat: "VII", jabatan: "Perekam Medis Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=8" },
+        { id: 11, pid: 10, Jabatan_Pelaksana: "Koordinator Ketatausahaan", Nama_Lengkap: "Cahyu Dana Safitri, A.Md.Kep.", pangkat: "Pengatur Muda Tk. 1/II d", jabatan: "Perawat Terampil", status: "PNS", tugas: "Bendahara Penerimaan", img: "https://i.pravatar.cc/150?img=3" },
+        { id: 12, pid: 10, Jabatan_Pelaksana: "Koordinator SDM", Nama_Lengkap: "Siti Nurul Hidayah, S.K.M.", pangkat: "IX", jabatan: "Promotor Kesehatan Ahli Pertama", status: "PPPK", tugas: "Bendahara Barang Persediaan Non Obat", img: "https://i.pravatar.cc/150?img=4" },
+        { id: 13, pid: 10, Jabatan_Pelaksana: "Koordinator Manajemen", Nama_Lengkap: "apt. Muhammad Taufik Mubarok, S.Farm.", pangkat: "IX", jabatan: "Administrator Kesehatan Ahli Pertama", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=5" },
+        { id: 14, pid: 10, Jabatan_Pelaksana: "Koordinator Mutu & Keselamatan Pasien", Nama_Lengkap: "Happy Hartaning Sandy, A.Md.Keb.", pangkat: "VII", jabatan: "Bidan Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=6" },
+        { id: 15, pid: 10, Jabatan_Pelaksana: "Koordinator Jejaring", Nama_Lengkap: "Sri Kusmini, A.Md.Keb.", pangkat: "Pengatur Muda Tk. 1/II d", jabatan: "Bidan Mahir", status: "PNS", tugas: "Bendahara BOK", img: "https://i.pravatar.cc/150?img=7" },
+        { id: 16, pid: 10, Jabatan_Pelaksana: "Koordinator Sistem Informasi", Nama_Lengkap: "Winarni, A.Md.RMIK.", pangkat: "VII", jabatan: "Perekam Medis Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=8" },
 
         // KLASTER 2
-        { id: 20, pid: 1, name: "PJ Klaster 2 (Ibu & Anak)", title: "Retno Suciati, S.Tr.Keb., Bdn.", pangkat: "Penata Tk. 1/III d", jabatan: "Bidan Ahli Muda", status: "PNS", tugas: "Pejabat Teknis", img: "https://i.pravatar.cc/150?img=9" },
+        { id: 20, pid: 1, Jabatan_Pelaksana: "PJ Klaster 2 (Ibu & Anak)", Nama_Lengkap: "Retno Suciati, S.Tr.Keb., Bdn.", pangkat: "Penata Tk. 1/III d", jabatan: "Bidan Ahli Muda", status: "PNS", tugas: "Pejabat Teknis", img: "https://i.pravatar.cc/150?img=9" },
 
-        { id: 21, pid: 20, name: "Koordinator Ibu Hamil", title: "Ririn Widiyanti, A.Md.Keb.", pangkat: "VII", jabatan: "Bidan Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=10" },
-        { id: 22, pid: 20, name: "Koordinator Balita", title: "Denny Ratna, A.Md.Keb.", pangkat: "VII", jabatan: "Bidan Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=11" },
-        { id: 23, pid: 20, name: "Koordinator Remaja", title: "Ike Sukasih, A.Md.Keb.", pangkat: "Pengatur Muda Tk. 1/II d", jabatan: "Bidan Terampil", status: "PNS", tugas: "-", img: "https://i.pravatar.cc/150?img=12" },
+        { id: 21, pid: 20, Jabatan_Pelaksana: "Koordinator Ibu Hamil", Nama_Lengkap: "Ririn Widiyanti, A.Md.Keb.", pangkat: "VII", jabatan: "Bidan Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=10" },
+        { id: 22, pid: 20, Jabatan_Pelaksana: "Koordinator Balita", Nama_Lengkap: "Denny Ratna, A.Md.Keb.", pangkat: "VII", jabatan: "Bidan Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=11" },
+        { id: 23, pid: 20, Jabatan_Pelaksana: "Koordinator Remaja", Nama_Lengkap: "Ike Sukasih, A.Md.Keb.", pangkat: "Pengatur Muda Tk. 1/II d", jabatan: "Bidan Terampil", status: "PNS", tugas: "-", img: "https://i.pravatar.cc/150?img=12" },
 
         // KLASTER 3
-        { id: 30, pid: 1, name: "PJ Klaster 3 (Dewasa & Lansia)", title: "dr. Mualimatul Kurniyawati", pangkat: "Penata Muda Tk. 1/III b", jabatan: "Dokter Ahli Pertama", status: "PNS", tugas: "Pejabat Teknis", img: "https://i.pravatar.cc/150?img=13" },
+        { id: 30, pid: 1, Jabatan_Pelaksana: "PJ Klaster 3 (Dewasa & Lansia)", Nama_Lengkap: "dr. Mualimatul Kurniyawati", pangkat: "Penata Muda Tk. 1/III b", jabatan: "Dokter Ahli Pertama", status: "PNS", tugas: "Pejabat Teknis", img: "https://i.pravatar.cc/150?img=13" },
 
-        { id: 31, pid: 30, name: "Koordinator Dewasa", title: "Ayu Dwi Sefterina, A.Md.Kep.", pangkat: "VII", jabatan: "Perawat Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=14" },
-        { id: 32, pid: 30, name: "Koordinator Lansia", title: "Apit Widyastuti, A.Md.Kep.", pangkat: "VII", jabatan: "Perawat Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=15" },
+        { id: 31, pid: 30, Jabatan_Pelaksana: "Koordinator Dewasa", Nama_Lengkap: "Ayu Dwi Sefterina, A.Md.Kep.", pangkat: "VII", jabatan: "Perawat Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=14" },
+        { id: 32, pid: 30, Jabatan_Pelaksana: "Koordinator Lansia", Nama_Lengkap: "Apit Widyastuti, A.Md.Kep.", pangkat: "VII", jabatan: "Perawat Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=15" },
 
         // KLASTER 4
-        { id: 40, pid: 1, name: "PJ Klaster 4 (P2PM)", title: "Ns. Bekti Prasetyo, S.Kep.", pangkat: "X", jabatan: "Perawat Ahli Pertama", status: "PPPK", tugas: "Pejabat Teknis", img: "https://i.pravatar.cc/150?img=16" },
+        { id: 40, pid: 1, Jabatan_Pelaksana: "PJ Klaster 4 (P2PM)", Nama_Lengkap: "Ns. Bekti Prasetyo, S.Kep.", pangkat: "X", jabatan: "Perawat Ahli Pertama", status: "PPPK", tugas: "Pejabat Teknis", img: "https://i.pravatar.cc/150?img=16" },
 
-        { id: 41, pid: 40, name: "Koordinator Kesling", title: "Danik Fachrudin, S.K.M.", pangkat: "IX", jabatan: "Sanitarian Ahli Pertama", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=17" },
-        { id: 42, pid: 40, name: "Koordinator Surveilans", title: "Dimas Agus Saputro, A.Md.Kep.", pangkat: "VII", jabatan: "Perawat Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=18" },
+        { id: 41, pid: 40, Jabatan_Pelaksana: "Koordinator Kesling", Nama_Lengkap: "Danik Fachrudin, S.K.M.", pangkat: "IX", jabatan: "Sanitarian Ahli Pertama", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=17" },
+        { id: 42, pid: 40, Jabatan_Pelaksana: "Koordinator Surveilans", Nama_Lengkap: "Dimas Agus Saputro, A.Md.Kep.", pangkat: "VII", jabatan: "Perawat Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=18" },
 
         // KLASTER 5
-        { id: 50, pid: 1, name: "PJ Klaster 5 (Lintas Klaster)", title: "dr. Jenny Prima", pangkat: "IX", jabatan: "Dokter Ahli Pertama", status: "PPPK", tugas: "Pejabat Teknis", img: "https://i.pravatar.cc/150?img=19" },
+        { id: 50, pid: 1, Jabatan_Pelaksana: "PJ Klaster 5 (Lintas Klaster)", Nama_Lengkap: "dr. Jenny Prima", pangkat: "IX", jabatan: "Dokter Ahli Pertama", status: "PPPK", tugas: "Pejabat Teknis", img: "https://i.pravatar.cc/150?img=19" },
 
-        { id: 51, pid: 50, name: "Koordinator Gawat Darurat", title: "Dimas Agus Saputro, A.Md.Kep.", pangkat: "VII", jabatan: "Perawat Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=20" },
-        { id: 52, pid: 50, name: "Koordinator Lab", title: "Ginuk Ari Setiyoningrum, A.Md.A.K.", pangkat: "Pengatur Muda Tk. 1/II d", jabatan: "Pranata Laboratorium Kesehatan Terampil", status: "PNS", tugas: "Bendahara Barang Aset", img: "https://i.pravatar.cc/150?img=21" },
-        { id: 53, pid: 50, name: "Koordinator Farmasi", title: "apt. Sofa Rohmaniyah, S.Farm.", pangkat: "Penata Muda Tk. 1/III b", jabatan: "Apoteker Ahli Pertama", status: "PNS", tugas: "Bendahara Barang Persediaan Obat", img: "https://i.pravatar.cc/150?img=22" }
+        { id: 51, pid: 50, Jabatan_Pelaksana: "Koordinator Gawat Darurat", Nama_Lengkap: "Dimas Agus Saputro, A.Md.Kep.", pangkat: "VII", jabatan: "Perawat Terampil", status: "PPPK", tugas: "-", img: "https://i.pravatar.cc/150?img=20" },
+        { id: 52, pid: 50, Jabatan_Pelaksana: "Koordinator Lab", Nama_Lengkap: "Ginuk Ari Setiyoningrum, A.Md.A.K.", pangkat: "Pengatur Muda Tk. 1/II d", jabatan: "Pranata Laboratorium Kesehatan Terampil", status: "PNS", tugas: "Bendahara Barang Aset", img: "https://i.pravatar.cc/150?img=21" },
+        { id: 53, pid: 50, Jabatan_Pelaksana: "Koordinator Farmasi", Nama_Lengkap: "apt. Sofa Rohmaniyah, S.Farm.", pangkat: "Penata Muda Tk. 1/III b", jabatan: "Apoteker Ahli Pertama", status: "PNS", tugas: "Bendahara Barang Persediaan Obat", img: "https://i.pravatar.cc/150?img=22" }
 
 
     ]
-});
-
-chart.on('showDetails', function(sender, args){
-    setTimeout(() => {
-        document.querySelectorAll('.boc-field-label').forEach(el => {
-            let text = el.innerText.trim().toLowerCase();
-
-            if(text === "name") el.innerText = "Jabatan Pelaksana";
-            if(text === "title") el.innerText = "Nama Lengkap";
-        });
-    }, 50);
-});
-  
-function closePopup(){
-    document.getElementById("popup").style.display = "none";
-}
-
-  document.getElementById("popup").addEventListener("click", function(e){
-    if(e.target.id === "popup"){
-        closePopup();
-    }
-});
-
-chart.on('nodeClick', function(sender, args){
-    console.log("KEKLIK"); // cek muncul tidak di console
 });
 </script>
 
