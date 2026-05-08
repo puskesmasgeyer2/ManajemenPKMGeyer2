@@ -191,6 +191,7 @@ async function startDashboard(){
   // DASHBOARD SEMUA DATA
   if(currentPage === 'DASHBOARD'){
     renderDashboard(allData);
+    document.getElementById('loading').style.display = 'none';
     return;
   }
 
@@ -201,6 +202,7 @@ async function startDashboard(){
   );
 
   renderDashboard(filtered);
+  document.getElementById('loading').style.display = 'none';
 
 }
 
@@ -314,5 +316,6 @@ function applyFilters(){
   }
 
   renderDashboard(data);
+  
 
 }
