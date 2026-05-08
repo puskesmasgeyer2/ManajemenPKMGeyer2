@@ -171,3 +171,107 @@ async function startDashboard(){
 }
 
 startDashboard();
+
+// =====================================
+// FILTER INTERAKTIF
+// =====================================
+
+document
+.getElementById('filterBulan')
+.addEventListener('change', applyFilters);
+
+document
+.getElementById('filterDesa')
+.addEventListener('change', applyFilters);
+
+document
+.getElementById('filterPosyandu')
+.addEventListener('change', applyFilters);
+
+document
+.getElementById('searchNama')
+.addEventListener('input', applyFilters);
+
+
+// =====================================
+// APPLY FILTER
+// =====================================
+
+function applyFilters(){
+
+  let data = [...allData];
+
+  // FILTER SIKLUS
+  if(currentPage !== 'DASHBOARD'){
+
+    data = data.filter(item => {
+
+      const siklus =
+        String(item.Siklus || '')
+        .trim()
+        .toUpperCase();
+
+      return siklus === currentPage;
+
+    });
+
+  }
+
+  // FILTER BULAN
+  const bulan =
+    document.getElementById('filterBulan').value;
+
+  if(bulan){
+
+    data = data.filter(x =>
+      String(x.Bulan || '')
+      .trim() === bulan
+    );
+
+  }
+
+  // FILTER DESA
+  const desa =
+    document.getElementById('filterDesa').value;
+
+  if(desa){
+
+    data = data.filter(x =>
+      String(x.Desa || '')
+      .trim() === desa
+    );
+
+  }
+
+  // FILTER POSYANDU
+  const posyandu =
+    document.getElementById('filterPosyandu').value;
+
+  if(posyandu){
+
+    data = data.filter(x =>
+      String(x.Posyandu || '')
+      .trim() === posyandu
+    );
+
+  }
+
+  // SEARCH NAMA
+  const search =
+    document.getElementById('searchNama')
+    .value
+    .toLowerCase();
+
+  if(search){
+
+    data = data.filter(x =>
+      String(x.Nama || '')
+      .toLowerCase()
+      .includes(search)
+    );
+
+  }
+
+  renderDashboard(data);
+
+}
