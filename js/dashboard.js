@@ -1,10 +1,32 @@
 let allData = [];
+let chartInstance = null;
 
 async function loadData(){
 
+  // CEK CACHE
+  const cache =
+    localStorage.getItem('posyandu_data');
+
+  if(cache){
+
+    allData = JSON.parse(cache);
+
+    fillFilters(allData);
+
+    return;
+
+  }
+
+  // FETCH API
   const res = await fetch(API_URL);
 
   allData = await res.json();
+
+  // SIMPAN CACHE
+  localStorage.setItem(
+    'posyandu_data',
+    JSON.stringify(allData)
+  );
 
   fillFilters(allData);
 
@@ -40,13 +62,14 @@ function renderDashboard(data){
 
 function renderTable(data){
 
-  const tbody = document.querySelector('#tableData tbody');
+  const tbody =
+    document.querySelector('#tableData tbody');
 
-  tbody.innerHTML = '';
+  let html = '';
 
   data.slice(0,15).forEach(r=>{
 
-    tbody.innerHTML += `
+    html += `
       <tr>
         <td>${r.Nama || ''}</td>
         <td>${r.NIK || ''}</td>
@@ -59,6 +82,8 @@ function renderTable(data){
     `;
 
   });
+
+  tbody.innerHTML = html;
 
 }
 
@@ -100,7 +125,12 @@ function renderChart(data){
 
   });
 
-  new Chart(
+  // HAPUS CHART LAMA
+  if(chartInstance){
+    chartInstance.destroy();
+  }
+
+  chartInstance = new Chart(
     document.getElementById('chartSiklus'),
     {
       type:'bar',
@@ -110,6 +140,10 @@ function renderChart(data){
           label:'Jumlah',
           data:Object.values(counts)
         }]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false
       }
     }
   );
@@ -171,6 +205,13 @@ async function startDashboard(){
 }
 
 startDashboard();
+
+// AUTO REFRESH CACHE 5 MENIT
+setInterval(()=>{
+
+  localStorage.removeItem('posyandu_data');
+
+}, 300000);
 
 // =====================================
 // FILTER INTERAKTIF
