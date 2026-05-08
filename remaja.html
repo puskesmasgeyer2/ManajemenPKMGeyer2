@@ -1,1 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Dashboard Remaja</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+
+    body{
+      margin:0;
+      font-family:Arial;
+      background:#f4f7f6;
+    }
+
+    .header{
+      background:#0f9d58;
+      color:white;
+      padding:15px 20px;
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .title{
+      font-size:28px;
+      font-weight:bold;
+    }
+
+    .menu{
+      display:flex;
+      gap:15px;
+      flex-wrap:wrap;
+    }
+
+    .menu a{
+      color:white;
+      text-decoration:none;
+      padding:10px 16px;
+      border-radius:10px;
+      transition:0.3s;
+      background:rgba(255,255,255,0.1);
+    }
+
+    .menu a:hover{
+      background:white;
+      color:#0f9d58;
+    }
+
+    .container{
+      padding:20px;
+    }
+
+    .filters{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:20px;
+    }
+
+    select,input{
+      padding:10px;
+      border-radius:10px;
+      border:1px solid #ccc;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px;
+      margin-bottom:20px;
+    }
+
+    .card{
+      background:white;
+      padding:20px;
+      border-radius:16px;
+      box-shadow:0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .card h2{
+      margin:0;
+      color:#0f9d58;
+      font-size:32px;
+    }
+
+    .chart-box{
+      background:white;
+      padding:20px;
+      border-radius:16px;
+      box-shadow:0 2px 12px rgba(0,0,0,0.08);
+      margin-bottom:20px;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      background:white;
+    }
+
+    th,td{
+      padding:10px;
+      border:1px solid #ddd;
+      font-size:14px;
+    }
+
+    th{
+      background:#0f9d58;
+      color:white;
+      position:sticky;
+      top:0;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="header">
+
+  <div class="title">
+    Dashboard Remaja
+  </div>
+
+  <div class="menu">
+
+    <a href="dashboard.html">Dashboard</a>
+
+    <a href="balita.html">Balita</a>
+
+    <a href="remaja.html">Remaja</a>
+
+    <a href="dewasa.html">Dewasa</a>
+
+    <a href="lansia.html">Lansia</a>
+
+  </div>
+
+</div>
+
+<div class="container">
+
+  <div class="filters">
+
+    <select id="filterBulan">
+      <option value="">Semua Bulan</option>
+    </select>
+
+    <select id="filterDesa">
+      <option value="">Semua Desa</option>
+    </select>
+
+    <select id="filterPosyandu">
+      <option value="">Semua Posyandu</option>
+    </select>
+
+    <input type="text" id="searchNama" placeholder="Cari Nama">
+
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <h2 id="totalData">0</h2>
+      <p>Total Kunjungan</p>
+    </div>
+
+    <div class="card">
+      <h2 id="totalTB">0</h2>
+      <p>Suspek TB</p>
+    </div>
+
+    <div class="card">
+      <h2 id="totalStunting">0</h2>
+      <p>Stunting</p>
+    </div>
+
+    <div class="card">
+      <h2 id="totalHipertensi">0</h2>
+      <p>Hipertensi</p>
+    </div>
+
+  </div>
+
+  <div class="chart-box">
+    <canvas id="chartSiklus"></canvas>
+  </div>
+
+  <div class="chart-box" style="overflow:auto; max-height:500px;">
+
+    <table id="tableData">
+
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>NIK</th>
+          <th>Desa</th>
+          <th>Posyandu</th>
+          <th>Siklus</th>
+          <th>Status TB</th>
+          <th>Status Tensi</th>
+        </tr>
+      </thead>
+
+      <tbody></tbody>
+
+    </table>
+
+  </div>
+
+</div>
+<script src="js/config.js"></script>
+<script src="js/dashboard.js"></script>
+  
+</body>
+</html>
