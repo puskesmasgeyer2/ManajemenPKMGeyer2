@@ -19,9 +19,37 @@
     .header{
       background:#0f9d58;
       color:white;
-      padding:20px;
-      font-size:24px;
+      padding:15px 20px;
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .title{
+      font-size:28px;
       font-weight:bold;
+    }
+
+    .menu{
+      display:flex;
+      gap:15px;
+      flex-wrap:wrap;
+    }
+
+    .menu a{
+      color:white;
+      text-decoration:none;
+      padding:10px 16px;
+      border-radius:10px;
+      transition:0.3s;
+      background:rgba(255,255,255,0.1);
+    }
+
+    .menu a:hover{
+      background:white;
+      color:#0f9d58;
     }
 
     .container{
@@ -93,7 +121,25 @@
 <body>
 
 <div class="header">
-  Dashboard Posyandu ILP
+
+  <div class="title">
+    Dashboard Posyandu ILP
+  </div>
+
+  <div class="menu">
+
+    <a href="dashboard.html">Dashboard</a>
+
+    <a href="balita.html">Balita</a>
+
+    <a href="remaja.html">Remaja</a>
+
+    <a href="dewasa.html">Dewasa</a>
+
+    <a href="lansia.html">Lansia</a>
+
+  </div>
+
 </div>
 
 <div class="container">
