@@ -118,4 +118,27 @@ function renderChart(data){
 
 }
 
-loadData();
+const pageName =
+window.location.pathname
+.split('/')
+.pop()
+.replace('.html','')
+.toUpperCase();
+
+async function start(){
+
+  await loadData();
+
+  if(pageName !== 'DASHBOARD'){
+
+    const filtered = allData.filter(x =>
+      x.Siklus === pageName
+    );
+
+    renderDashboard(filtered);
+
+  }
+
+}
+
+start();
