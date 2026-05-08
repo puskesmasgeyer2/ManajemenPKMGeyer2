@@ -6,8 +6,6 @@ async function loadData(){
 
   allData = await res.json();
 
-  renderDashboard(allData);
-
   fillFilters(allData);
 
 }
