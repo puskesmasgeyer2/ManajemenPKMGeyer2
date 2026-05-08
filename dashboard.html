@@ -164,8 +164,6 @@
       <option value="">Semua Posyandu</option>
     </select>
 
-    <input type="text" id="searchNama" placeholder="Cari Nama">
-
   </div>
 
   <div class="cards">
@@ -196,8 +194,29 @@
     <canvas id="chartSiklus"></canvas>
   </div>
 
-  <div class="chart-box" style="overflow:auto; max-height:500px;">
+  <div class="chart-box">
 
+  <div style="
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:15px;
+  ">
+
+    <input
+      type="text"
+      id="searchNama"
+      placeholder="Cari Nama..."
+      style="
+        width:250px;
+        padding:10px;
+        border-radius:10px;
+        border:1px solid #ccc;
+      "
+    >
+
+  </div>
+
+  <div style="overflow:auto; max-height:500px;">
     <table id="tableData">
 
       <thead>
@@ -216,6 +235,7 @@
 
     </table>
 
+  </div>
   </div>
 
 </div>
