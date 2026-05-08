@@ -118,27 +118,58 @@ function renderChart(data){
 
 }
 
-const pageName =
+// ===============================
+// DETEKSI HALAMAN
+// ===============================
+
+const currentPage =
 window.location.pathname
 .split('/')
 .pop()
 .replace('.html','')
 .toUpperCase();
 
-async function start(){
+
+// ===============================
+// MENU AKTIF
+// ===============================
+
+document.querySelectorAll('.menu a')
+.forEach(link=>{
+
+  const href = link.getAttribute('href')
+    .replace('.html','')
+    .toUpperCase();
+
+  if(href === currentPage){
+    link.classList.add('active-menu');
+  }
+
+});
+
+
+// ===============================
+// START DASHBOARD
+// ===============================
+
+async function startDashboard(){
 
   await loadData();
 
-  if(pageName !== 'DASHBOARD'){
-
-    const filtered = allData.filter(x =>
-      x.Siklus === pageName
-    );
-
-    renderDashboard(filtered);
-
+  // DASHBOARD SEMUA DATA
+  if(currentPage === 'DASHBOARD'){
+    renderDashboard(allData);
+    return;
   }
+
+  // FILTER PER SIKLUS
+  const filtered = allData.filter(item =>
+    item.Siklus &&
+    item.Siklus.toUpperCase() === currentPage
+  );
+
+  renderDashboard(filtered);
 
 }
 
-start();
+startDashboard();
