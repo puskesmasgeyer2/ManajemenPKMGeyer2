@@ -172,32 +172,35 @@
       <option value="">Semua Posyandu</option>
     </select>
 
-  </div>
-
   <div class="cards">
 
-    <div class="card">
-      <h2 id="totalData">0</h2>
-      <p>Total Kunjungan</p>
-    </div>
-
-    <div class="card">
-      <h2 id="totalTB">0</h2>
-      <p>Suspek TB</p>
-    </div>
-
-    <div class="card">
-      <h2 id="totalStunting">0</h2>
-      <p>Stunting</p>
-    </div>
-
-    <div class="card">
-      <h2 id="totalHipertensi">0</h2>
-      <p>Hipertensi</p>
-    </div>
-
+  <div class="card">
+    <h2 id="totalBayi">0</h2>
+    <p>Bayi</p>
   </div>
 
+  <div class="card">
+    <h2 id="totalBalita">0</h2>
+    <p>Balita</p>
+  </div>
+
+  <div class="card">
+    <h2 id="totalRemaja">0</h2>
+    <p>Remaja</p>
+  </div>
+
+  <div class="card">
+    <h2 id="totalDewasa">0</h2>
+    <p>Dewasa</p>
+  </div>
+
+  <div class="card">
+    <h2 id="totalLansia">0</h2>
+    <p>Lansia</p>
+  </div>
+
+</div>
+    
   <div class="chart-box">
     <canvas id="chartSiklus"></canvas>
   </div>
@@ -231,10 +234,11 @@
         <tr>
           <th>Nama</th>
           <th>NIK</th>
-          <th>Desa</th>
-          <th>Posyandu</th>
-          <th>Siklus</th>
+          <th>Kelompok Umur</th>
+          <th>Status Gizi BB/TB</th>
+          <th>Status Stunting</th>
           <th>Status TB</th>
+          <th>Status Gula</th>
           <th>Status Tensi</th>
         </tr>
       </thead>
@@ -242,6 +246,19 @@
       <tbody></tbody>
 
     </table>
+    <div id="pagination" style="
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      margin-top:15px;
+      align-items:center;
+    ">
+      <button id="prevPage">Sebelumnya</button>
+
+      <span id="pageInfo">1</span>
+
+      <button id="nextPage">Berikutnya</button>
+    </div>
 
   </div>
   </div>
