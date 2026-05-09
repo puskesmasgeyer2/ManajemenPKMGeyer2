@@ -36,35 +36,41 @@ async function loadData(){
 
 function renderDashboard(data){
 
-  document.getElementById('totalBayi').innerText =
-    data.filter(x =>
-      String(x['Kelompok Umur'] || '')
-      .toUpperCase() === 'BAYI'
-    ).length;
+  const bayi = data.filter(x =>
+    String(x['Kelompok Umur'] || '')
+    .toUpperCase()
+    .includes('BAYI')
+  ).length;
 
-  document.getElementById('totalBalita').innerText =
-    data.filter(x =>
-      String(x['Kelompok Umur'] || '')
-      .toUpperCase() === 'BALITA'
-    ).length;
+  const balita = data.filter(x =>
+    String(x['Kelompok Umur'] || '')
+    .toUpperCase()
+    .includes('BALITA')
+  ).length;
 
-  document.getElementById('totalRemaja').innerText =
-    data.filter(x =>
-      String(x['Kelompok Umur'] || '')
-      .toUpperCase() === 'REMAJA'
-    ).length;
+  const remaja = data.filter(x =>
+    String(x['Kelompok Umur'] || '')
+    .toUpperCase()
+    .includes('REMAJA')
+  ).length;
 
-  document.getElementById('totalDewasa').innerText =
-    data.filter(x =>
-      String(x['Kelompok Umur'] || '')
-      .toUpperCase() === 'DEWASA'
-    ).length;
+  const dewasa = data.filter(x =>
+    String(x['Kelompok Umur'] || '')
+    .toUpperCase()
+    .includes('DEWASA')
+  ).length;
 
-  document.getElementById('totalLansia').innerText =
-    data.filter(x =>
-      String(x['Kelompok Umur'] || '')
-      .toUpperCase() === 'LANSIA'
-    ).length;
+  const lansia = data.filter(x =>
+    String(x['Kelompok Umur'] || '')
+    .toUpperCase()
+    .includes('LANSIA')
+  ).length;
+
+  document.getElementById('totalBayi').innerText = bayi;
+  document.getElementById('totalBalita').innerText = balita;
+  document.getElementById('totalRemaja').innerText = remaja;
+  document.getElementById('totalDewasa').innerText = dewasa;
+  document.getElementById('totalLansia').innerText = lansia;
 
   renderTable(data);
 
