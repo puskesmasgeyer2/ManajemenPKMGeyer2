@@ -36,35 +36,70 @@ async function loadData(){
 
 function renderDashboard(data){
 
-  const bayi = data.filter(x =>
-    String(x['Kelompok Umur'] || '')
-    .toUpperCase()
-    .includes('BAYI')
-  ).length;
+  const bayi = data.filter(x => {
 
-  const balita = data.filter(x =>
-    String(x['Kelompok Umur'] || '')
-    .toUpperCase()
-    .includes('BALITA')
-  ).length;
+    const umur =
+      String(
+        x['Kelompok Umur'] ||
+        x['Siklus'] ||
+        ''
+      ).toUpperCase();
 
-  const remaja = data.filter(x =>
-    String(x['Kelompok Umur'] || '')
-    .toUpperCase()
-    .includes('REMAJA')
-  ).length;
+    return umur.includes('BAYI');
 
-  const dewasa = data.filter(x =>
-    String(x['Kelompok Umur'] || '')
-    .toUpperCase()
-    .includes('DEWASA')
-  ).length;
+  }).length;
 
-  const lansia = data.filter(x =>
-    String(x['Kelompok Umur'] || '')
-    .toUpperCase()
-    .includes('LANSIA')
-  ).length;
+  const balita = data.filter(x => {
+
+    const umur =
+      String(
+        x['Kelompok Umur'] ||
+        x['Siklus'] ||
+        ''
+      ).toUpperCase();
+
+    return umur.includes('BALITA');
+
+  }).length;
+
+  const remaja = data.filter(x => {
+
+    const umur =
+      String(
+        x['Kelompok Umur'] ||
+        x['Siklus'] ||
+        ''
+      ).toUpperCase();
+
+    return umur.includes('REMAJA');
+
+  }).length;
+
+  const dewasa = data.filter(x => {
+
+    const umur =
+      String(
+        x['Kelompok Umur'] ||
+        x['Siklus'] ||
+        ''
+      ).toUpperCase();
+
+    return umur.includes('DEWASA');
+
+  }).length;
+
+  const lansia = data.filter(x => {
+
+    const umur =
+      String(
+        x['Kelompok Umur'] ||
+        x['Siklus'] ||
+        ''
+      ).toUpperCase();
+
+    return umur.includes('LANSIA');
+
+  }).length;
 
   document.getElementById('totalBayi').innerText = bayi;
   document.getElementById('totalBalita').innerText = balita;
