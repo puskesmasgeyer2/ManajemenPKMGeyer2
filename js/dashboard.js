@@ -109,7 +109,9 @@ function renderDashboard(data){
 
   renderTable(data);
 
-  renderChart(data);
+  renderChartUmur(data);
+  renderChartTB(data);
+  renderChartTensi(data);;
 
 }
 
@@ -175,43 +177,6 @@ function fillSelect(id,key,data){
     `;
 
   });
-
-}
-
-function renderChart(data){
-
-  const counts = {};
-
-  data.forEach(r=>{
-
-    const s = r.Siklus || 'Lainnya';
-
-    counts[s] = (counts[s] || 0) + 1;
-
-  });
-
-  // HAPUS CHART LAMA
-  if(chartInstance){
-    chartInstance.destroy();
-  }
-
-  chartInstance = new Chart(
-    document.getElementById('chartSiklus'),
-    {
-      type:'bar',
-      data:{
-        labels:Object.keys(counts),
-        datasets:[{
-          label:'Jumlah',
-          data:Object.values(counts)
-        }]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false
-      }
-    }
-  );
 
 }
 
@@ -427,3 +392,140 @@ document
   applyFilters();
 
 });
+
+function renderChartUmur(data){
+
+  const bayi = data.filter(x =>
+    String(x['Kelompok Umur'] || '')
+      .toUpperCase()
+      .includes('BAYI')
+  ).length;
+
+  const balita = data.filter(x =>
+    String(x['Kelompok Umur'] || '')
+      .toUpperCase()
+      .includes('BALITA')
+  ).length;
+
+  const remaja = data.filter(x =>
+    String(x['Kelompok Umur'] || '')
+      .toUpperCase()
+      .includes('REMAJA')
+  ).length;
+
+  const dewasa = data.filter(x =>
+    String(x['Kelompok Umur'] || '')
+      .toUpperCase()
+      .includes('DEWASA')
+  ).length;
+
+  const lansia = data.filter(x =>
+    String(x['Kelompok Umur'] || '')
+      .toUpperCase()
+      .includes('LANSIA')
+  ).length;
+
+  new Chart(document.getElementById('chartUmur'),{
+    type:'bar',
+    data:{
+      labels:[
+        'Bayi',
+        'Balita',
+        'Remaja',
+        'Dewasa',
+        'Lansia'
+      ],
+      datasets:[{
+        label:'Jumlah',
+        data:[
+          bayi,
+          balita,
+          remaja,
+          dewasa,
+          lansia
+        ]
+      }]
+    },
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{
+          display:false
+        }
+      }
+    }
+  });
+
+}
+
+function renderChartTB(data){
+
+  const suspek = data.filter(x =>
+    String(x['Status TB'] || '')
+      .toUpperCase()
+      .includes('SUSPEK')
+  ).length;
+
+  const tidak = data.filter(x =>
+    String(x['Status TB'] || '')
+      .toUpperCase()
+      .includes('TIDAK')
+  ).length;
+
+  new Chart(document.getElementById('chartTB'),{
+    type:'doughnut',
+    data:{
+      labels:[
+        'Suspek',
+        'Tidak Suspek'
+      ],
+      datasets:[{
+        data:[
+          suspek,
+          tidak
+        ]
+      }]
+    }
+  });
+
+}
+
+function renderChartTensi(data){
+
+  const normal = data.filter(x =>
+    String(x['Status Tensi'] || '')
+      .toUpperCase()
+      .includes('NORMAL')
+  ).length;
+
+  const pra = data.filter(x =>
+    String(x['Status Tensi'] || '')
+      .toUpperCase()
+      .includes('PRA')
+  ).length;
+
+  const hiper = data.filter(x =>
+    String(x['Status Tensi'] || '')
+      .toUpperCase()
+      .includes('HIPERTENSI')
+  ).length;
+
+  new Chart(document.getElementById('chartTensi'),{
+    type:'pie',
+    data:{
+      labels:[
+        'Normal',
+        'Pra Hipertensi',
+        'Hipertensi'
+      ],
+      datasets:[{
+        data:[
+          normal,
+          pra,
+          hiper
+        ]
+      }]
+    }
+  });
+
+}
