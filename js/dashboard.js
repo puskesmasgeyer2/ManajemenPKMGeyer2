@@ -1,3 +1,5 @@
+let currentPageTable = 1;
+const rowsPerPage = 15;
 let allData = [];
 let chartInstance = null;
 
@@ -34,25 +36,35 @@ async function loadData(){
 
 function renderDashboard(data){
 
-  document.getElementById('totalData').innerText = data.length;
+  document.getElementById('totalBayi').innerText =
+    data.filter(x =>
+      String(x['Kelompok Umur'] || '')
+      .toUpperCase() === 'BAYI'
+    ).length;
 
-  const tb = data.filter(x =>
-    x['Status TB'] === 'Suspek TB'
-  ).length;
+  document.getElementById('totalBalita').innerText =
+    data.filter(x =>
+      String(x['Kelompok Umur'] || '')
+      .toUpperCase() === 'BALITA'
+    ).length;
 
-  document.getElementById('totalTB').innerText = tb;
+  document.getElementById('totalRemaja').innerText =
+    data.filter(x =>
+      String(x['Kelompok Umur'] || '')
+      .toUpperCase() === 'REMAJA'
+    ).length;
 
-  const stunting = data.filter(x =>
-    x['Status Stunting (TB/U)'] === 'Pendek'
-  ).length;
+  document.getElementById('totalDewasa').innerText =
+    data.filter(x =>
+      String(x['Kelompok Umur'] || '')
+      .toUpperCase() === 'DEWASA'
+    ).length;
 
-  document.getElementById('totalStunting').innerText = stunting;
-
-  const hipertensi = data.filter(x =>
-    x['Status Tensi'] === 'Hipertensi'
-  ).length;
-
-  document.getElementById('totalHipertensi').innerText = hipertensi;
+  document.getElementById('totalLansia').innerText =
+    data.filter(x =>
+      String(x['Kelompok Umur'] || '')
+      .toUpperCase() === 'LANSIA'
+    ).length;
 
   renderTable(data);
 
@@ -67,16 +79,26 @@ function renderTable(data){
 
   let html = '';
 
-  data.slice(0,15).forEach(r=>{
+  const start =
+    (currentPageTable - 1) * rowsPerPage;
+
+  const end =
+    start + rowsPerPage;
+
+  const paginated =
+    data.slice(start, end);
+
+  paginated.forEach(r=>{
 
     html += `
       <tr>
         <td>${r.Nama || ''}</td>
         <td>${r.NIK || ''}</td>
-        <td>${r.Desa || ''}</td>
-        <td>${r.Posyandu || ''}</td>
-        <td>${r.Siklus || ''}</td>
+        <td>${r['Kelompok Umur'] || ''}</td>
+        <td>${r['Status Gizi BB/TB'] || ''}</td>
+        <td>${r['Status Stunting (TB/U)'] || ''}</td>
         <td>${r['Status TB'] || ''}</td>
+        <td>${r['Status Gula Darah'] || ''}</td>
         <td>${r['Status Tensi'] || ''}</td>
       </tr>
     `;
@@ -84,6 +106,8 @@ function renderTable(data){
   });
 
   tbody.innerHTML = html;
+
+  renderPagination(data.length);
 
 }
 
@@ -241,6 +265,8 @@ document
 // =====================================
 
 function applyFilters(){
+  
+  currentPageTable = 1;
 
   let data = [...allData];
 
@@ -319,3 +345,44 @@ function applyFilters(){
   
 
 }
+
+function renderPagination(totalRows){
+
+  const totalPages =
+    Math.ceil(totalRows / rowsPerPage);
+
+  document.getElementById('pageInfo')
+    .innerText =
+    `Halaman ${currentPageTable} dari ${totalPages}`;
+
+  document.getElementById('prevPage')
+    .disabled = currentPageTable === 1;
+
+  document.getElementById('nextPage')
+    .disabled = currentPageTable === totalPages;
+
+}
+
+document
+.getElementById('prevPage')
+.addEventListener('click', ()=>{
+
+  if(currentPageTable > 1){
+
+    currentPageTable--;
+
+    applyFilters();
+
+  }
+
+});
+
+document
+.getElementById('nextPage')
+.addEventListener('click', ()=>{
+
+  currentPageTable++;
+
+  applyFilters();
+
+});
