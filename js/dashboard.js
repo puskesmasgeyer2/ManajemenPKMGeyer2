@@ -460,17 +460,27 @@ function renderChartUmur(data){
 
 function renderChartTB(data){
 
-  const suspek = data.filter(x =>
-    String(x['Status TB'] || '')
-      .toUpperCase()
-      .includes('SUSPEK')
-  ).length;
+  const suspek = data.filter(x => {
 
-  const tidak = data.filter(x =>
+  const status =
     String(x['Status TB'] || '')
-      .toUpperCase()
-      .includes('TIDAK')
-  ).length;
+    .trim()
+    .toUpperCase();
+
+  return status === 'SUSPEK TB';
+
+  }).length;
+
+  const tidak = data.filter(x => {
+
+  const status =
+    String(x['Status TB'] || '')
+    .trim()
+    .toUpperCase();
+
+  return status === 'TIDAK SUSPEK';
+
+  }).length;
 
   new Chart(document.getElementById('chartTB'),{
     type:'doughnut',
@@ -492,23 +502,38 @@ function renderChartTB(data){
 
 function renderChartTensi(data){
 
-  const normal = data.filter(x =>
-    String(x['Status Tensi'] || '')
-      .toUpperCase()
-      .includes('NORMAL')
-  ).length;
+  const normal = data.filter(x => {
 
-  const pra = data.filter(x =>
+  const status =
     String(x['Status Tensi'] || '')
-      .toUpperCase()
-      .includes('PRA')
-  ).length;
+    .trim()
+    .toUpperCase();
 
-  const hiper = data.filter(x =>
+  return status === 'NORMAL';
+
+  }).length;
+
+  const pra = data.filter(x => {
+
+  const status =
     String(x['Status Tensi'] || '')
-      .toUpperCase()
-      .includes('HIPERTENSI')
-  ).length;
+    .trim()
+    .toUpperCase();
+
+  return status === 'PRA HIPERTENSI';
+
+  }).length;
+
+  const hiper = data.filter(x => {
+
+  const status =
+    String(x['Status Tensi'] || '')
+    .trim()
+    .toUpperCase();
+
+  return status === 'HIPERTENSI';
+
+  }).length;
 
   new Chart(document.getElementById('chartTensi'),{
     type:'pie',
