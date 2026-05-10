@@ -1,8 +1,6 @@
 let currentPageTable = 1;
 const rowsPerPage = 15;
 let allData = [];
-const currentPage =
-document.title.toUpperCase();
 let chartInstance = null;
 
 async function loadData(){
@@ -296,7 +294,7 @@ async function startDashboard(){
   await loadData();
 
   // DASHBOARD SEMUA DATA
-  if(currentPage === 'DASHBOARD'){
+  if(currentPage.includes('DASHBOARD')){
     renderDashboard(allData);
     document.getElementById('loading').style.display = 'none';
     return;
@@ -352,6 +350,79 @@ function applyFilters(){
   currentPageTable = 1;
 
   let data = [...allData];
+
+  // ======================
+// FILTER HALAMAN
+// ======================
+
+if(currentPage === 'BALITA'){
+
+  data = data.filter(x => {
+
+    const umur =
+      String(
+        x['Kelompok Umur'] ||
+        x['Siklus'] ||
+        ''
+      ).toUpperCase();
+
+    return umur.includes('BAYI')
+    || umur.includes('BALITA');
+
+  });
+
+}
+
+if(currentPage === 'REMAJA'){
+
+  data = data.filter(x => {
+
+    const umur =
+      String(
+        x['Kelompok Umur'] ||
+        x['Siklus'] ||
+        ''
+      ).toUpperCase();
+
+    return umur.includes('REMAJA');
+
+  });
+
+}
+
+if(currentPage === 'DEWASA'){
+
+  data = data.filter(x => {
+
+    const umur =
+      String(
+        x['Kelompok Umur'] ||
+        x['Siklus'] ||
+        ''
+      ).toUpperCase();
+
+    return umur.includes('DEWASA');
+
+  });
+
+}
+
+if(currentPage === 'LANSIA'){
+
+  data = data.filter(x => {
+
+    const umur =
+      String(
+        x['Kelompok Umur'] ||
+        x['Siklus'] ||
+        ''
+      ).toUpperCase();
+
+    return umur.includes('LANSIA');
+
+  });
+
+}
 
   // FILTER SIKLUS
   if(currentPage !== 'DASHBOARD'){
