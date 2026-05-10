@@ -109,9 +109,41 @@ function renderDashboard(data){
 
   renderTable(data);
 
+  if(currentPage === 'DASHBOARD'){
+
   renderChartUmur(data);
   renderChartTB(data);
-  renderChartTensi(data);;
+  renderChartTensi(data);
+
+}
+
+if(currentPage === 'BALITA'){
+
+  renderChartGizi(data);
+  renderChartStunting(data);
+
+}
+
+if(currentPage === 'REMAJA'){
+
+  renderChartTB(data);
+
+}
+
+if(currentPage === 'DEWASA'){
+
+  renderChartTB(data);
+  renderChartGula(data);
+  renderChartTensi(data);
+
+}
+
+if(currentPage === 'LANSIA'){
+
+  renderChartTensi(data);
+  renderChartGula(data);
+
+}
 
 }
 
