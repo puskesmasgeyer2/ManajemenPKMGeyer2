@@ -471,7 +471,6 @@ document
   applyFilters();
 
 });
-}
 
 function hideElement(id){
 
