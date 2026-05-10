@@ -1,7 +1,6 @@
 let currentPageTable = 1;
 const rowsPerPage = 15;
 let allData = [];
-let chartInstance = null;
 
 async function loadData(){
 
@@ -111,83 +110,30 @@ function renderDashboard(data){
   // ======================
 
   renderTable(data);
-
-  // ======================
-  // DASHBOARD
-  // ======================
+  destroyCharts();
 
   if(currentPage.includes('DASHBOARD')){
 
-    showElement('chartUmur');
-    showElement('chartTB');
-    showElement('chartTensi');
+    renderChartKehadiran(data);
 
-    renderChartUmur(data);
-    renderChartTB(data);
+    renderChartBBU(data);
+
+    renderChartTBU(data);
+
+    renderChartBBTB(data);
+
+    renderChartHB(data);
+
     renderChartTensi(data);
 
-  }
+    renderChartGula(data);
 
-  // ======================
-  // BALITA
-  // ======================
-
-  if(currentPage.includes('BALITA')){
-
-    showElement('chartUmur');
-
-    hideElement('chartTB');
-    hideElement('chartTensi');
-
-    renderChartUmur(data);
-
-  }
-
-  // ======================
-  // REMAJA
-  // ======================
-
-  if(currentPage.includes('REMAJA')){
-
-    showElement('chartTB');
-
-    hideElement('chartUmur');
-    hideElement('chartTensi');
+    renderChartAsamUrat(data);
 
     renderChartTB(data);
 
   }
 
-  // ======================
-  // DEWASA
-  // ======================
-
-  if(currentPage.includes('DEWASA')){
-
-    showElement('chartTB');
-    showElement('chartTensi');
-
-    hideElement('chartUmur');
-
-    renderChartTB(data);
-    renderChartTensi(data);
-
-  }
-
-  // ======================
-  // LANSIA
-  // ======================
-
-  if(currentPage.includes('LANSIA')){
-
-    showElement('chartTensi');
-
-    hideElement('chartTB');
-    hideElement('chartUmur');
-
-    renderChartTensi(data);
-
-  }
 
 }
 
@@ -525,167 +471,6 @@ document
   applyFilters();
 
 });
-
-function renderChartUmur(data){
-
-  const bayi = data.filter(x =>
-    String(x['Kelompok Umur'] || '')
-      .toUpperCase()
-      .includes('BAYI')
-  ).length;
-
-  const balita = data.filter(x =>
-    String(x['Kelompok Umur'] || '')
-      .toUpperCase()
-      .includes('BALITA')
-  ).length;
-
-  const remaja = data.filter(x =>
-    String(x['Kelompok Umur'] || '')
-      .toUpperCase()
-      .includes('REMAJA')
-  ).length;
-
-  const dewasa = data.filter(x =>
-    String(x['Kelompok Umur'] || '')
-      .toUpperCase()
-      .includes('DEWASA')
-  ).length;
-
-  const lansia = data.filter(x =>
-    String(x['Kelompok Umur'] || '')
-      .toUpperCase()
-      .includes('LANSIA')
-  ).length;
-
-  new Chart(document.getElementById('chartUmur'),{
-    type:'bar',
-    data:{
-      labels:[
-        'Bayi',
-        'Balita',
-        'Remaja',
-        'Dewasa',
-        'Lansia'
-      ],
-      datasets:[{
-        label:'Jumlah',
-        data:[
-          bayi,
-          balita,
-          remaja,
-          dewasa,
-          lansia
-        ]
-      }]
-    },
-    options:{
-      responsive:true,
-      plugins:{
-        legend:{
-          display:false
-        }
-      }
-    }
-  });
-
-}
-
-function renderChartTB(data){
-
-  const suspek = data.filter(x => {
-
-  const status =
-    String(x['Status TB'] || '')
-    .trim()
-    .toUpperCase();
-
-  return status === 'SUSPEK TB';
-
-  }).length;
-
-  const tidak = data.filter(x => {
-
-  const status =
-    String(x['Status TB'] || '')
-    .trim()
-    .toUpperCase();
-
-  return status === 'TIDAK SUSPEK';
-
-  }).length;
-
-  new Chart(document.getElementById('chartTB'),{
-    type:'doughnut',
-    data:{
-      labels:[
-        'Suspek',
-        'Tidak Suspek'
-      ],
-      datasets:[{
-        data:[
-          suspek,
-          tidak
-        ]
-      }]
-    }
-  });
-
-}
-
-function renderChartTensi(data){
-
-  const normal = data.filter(x => {
-
-  const status =
-    String(x['Status Tensi'] || '')
-    .trim()
-    .toUpperCase();
-
-  return status === 'NORMAL';
-
-  }).length;
-
-  const pra = data.filter(x => {
-
-  const status =
-    String(x['Status Tensi'] || '')
-    .trim()
-    .toUpperCase();
-
-  return status === 'PRA HIPERTENSI';
-
-  }).length;
-
-  const hiper = data.filter(x => {
-
-  const status =
-    String(x['Status Tensi'] || '')
-    .trim()
-    .toUpperCase();
-
-  return status === 'HIPERTENSI';
-
-  }).length;
-
-  new Chart(document.getElementById('chartTensi'),{
-    type:'pie',
-    data:{
-      labels:[
-        'Normal',
-        'Pra Hipertensi',
-        'Hipertensi'
-      ],
-      datasets:[{
-        data:[
-          normal,
-          pra,
-          hiper
-        ]
-      }]
-    }
-  });
-
 }
 
 function hideElement(id){
@@ -713,5 +498,15 @@ function showElement(id){
     'block';
 
   }
+
+}
+
+let allCharts = [];
+
+function destroyCharts(){
+
+  allCharts.forEach(c => c.destroy());
+
+  allCharts = [];
 
 }
