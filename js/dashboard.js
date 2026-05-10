@@ -186,9 +186,6 @@ if(currentPage.includes('LANSIA')){
 
   renderChartTensi(data);
 
-}
-
-}
 } // penutup if(currentPage === 'DASHBOARD')
 
 } // penutup function renderDashboard()
