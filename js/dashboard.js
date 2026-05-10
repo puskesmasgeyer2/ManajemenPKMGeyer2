@@ -115,7 +115,7 @@ function renderDashboard(data){
 // DASHBOARD UTAMA
 // ======================
 
-if(currentPage.includes('POSYANDU')){
+if(currentPage.includes('DASHBOARD')){
 
   showElement('chartUmur');
   showElement('chartTB');
@@ -189,6 +189,9 @@ if(currentPage.includes('LANSIA')){
 }
 
 }
+} // penutup if(currentPage === 'DASHBOARD')
+
+} // penutup function renderDashboard()
 
 function renderTable(data){
 
@@ -423,22 +426,6 @@ if(currentPage === 'LANSIA'){
   });
 
 }
-
-  // FILTER SIKLUS
-  if(currentPage !== 'DASHBOARD'){
-
-    data = data.filter(item => {
-
-      const siklus =
-        String(item.Siklus || '')
-        .trim()
-        .toUpperCase();
-
-      return siklus === currentPage;
-
-    });
-
-  }
 
   // FILTER BULAN
   const bulan =
