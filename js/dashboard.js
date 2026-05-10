@@ -509,3 +509,161 @@ function destroyCharts(){
   allCharts = [];
 
 }
+
+function createChart(id, config){
+
+  const ctx =
+    document.getElementById(id);
+
+  if(!ctx) return;
+
+  const chart =
+    new Chart(ctx, config);
+
+  allCharts.push(chart);
+
+}
+
+function renderChartKehadiran(data){
+
+  const labels = [
+    'Bayi',
+    'Balita',
+    'Remaja',
+    'Dewasa',
+    'Lansia'
+  ];
+
+  const values = [
+    data.filter(x => String(x['Kelompok Umur'] || x['Siklus'] || '').toUpperCase().includes('BAYI')).length,
+
+    data.filter(x => String(x['Kelompok Umur'] || x['Siklus'] || '').toUpperCase().includes('BALITA')).length,
+
+    data.filter(x => String(x['Kelompok Umur'] || x['Siklus'] || '').toUpperCase().includes('REMAJA')).length,
+
+    data.filter(x => String(x['Kelompok Umur'] || x['Siklus'] || '').toUpperCase().includes('DEWASA')).length,
+
+    data.filter(x => String(x['Kelompok Umur'] || x['Siklus'] || '').toUpperCase().includes('LANSIA')).length
+  ];
+
+  createChart('chartKehadiran', {
+    type:'bar',
+    data:{
+      labels:labels,
+      datasets:[{
+        label:'Jumlah',
+        data:values
+      }]
+    }
+  });
+
+}
+
+function renderChartBBU(data){
+
+  const balita =
+    data.filter(x =>
+      String(x['Kelompok Umur'] || '')
+      .toUpperCase()
+      .includes('BALITA')
+    );
+
+  const labels = [
+    'Gizi Baik',
+    'Gizi Buruk',
+    'Gizi Kurang',
+    'Resiko Gizi Lebih'
+  ];
+
+  const values = labels.map(label =>
+    balita.filter(x =>
+      String(x['Status Gizi BB/U'] || '')
+      .trim()
+      .toUpperCase() === label.toUpperCase()
+    ).length
+  );
+
+  createChart('chartBBU',{
+    type:'pie',
+    data:{
+      labels:labels,
+      datasets:[{
+        data:values
+      }]
+    }
+  });
+
+}
+
+function renderChartTBU(data){
+
+  const balita =
+    data.filter(x =>
+      String(x['Kelompok Umur'] || '')
+      .toUpperCase()
+      .includes('BALITA')
+    );
+
+  const labels = [
+    'Sangat Pendek',
+    'Pendek/Stunting',
+    'Normal'
+  ];
+
+  const values = labels.map(label =>
+    balita.filter(x =>
+      String(x['Status Stunting (TB/U)'] || '')
+      .trim()
+      .toUpperCase() === label.toUpperCase()
+    ).length
+  );
+
+  createChart('chartTBU',{
+    type:'doughnut',
+    data:{
+      labels:labels,
+      datasets:[{
+        data:values
+      }]
+    }
+  });
+
+}
+
+function renderChartBBTB(data){
+
+  const balita =
+    data.filter(x =>
+      String(x['Kelompok Umur'] || '')
+      .toUpperCase()
+      .includes('BALITA')
+    );
+
+  const labels = [
+    'Gizi Baik',
+    'Gizi Buruk',
+    'Gizi Kurang',
+    'Resiko Gizi Lebih'
+  ];
+
+  const values = labels.map(label =>
+    balita.filter(x =>
+      String(x['Status Gizi BB/TB'] || '')
+      .trim()
+      .toUpperCase() === label.toUpperCase()
+    ).length
+  );
+
+  createChart('chartBBTB',{
+    type:'bar',
+    data:{
+      labels:labels,
+      datasets:[{
+        label:'Jumlah',
+        data:values
+      }]
+    }
+  });
+
+}
+
