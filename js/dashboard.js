@@ -1,6 +1,8 @@
 let currentPageTable = 1;
 const rowsPerPage = 15;
 let allData = [];
+const currentPage =
+document.title.toUpperCase();
 let chartInstance = null;
 
 async function loadData(){
@@ -111,37 +113,80 @@ function renderDashboard(data){
 
   if(currentPage === 'DASHBOARD'){
 
+  // ======================
+// DASHBOARD UTAMA
+// ======================
+
+if(currentPage.includes('POSYANDU')){
+
+  showElement('chartUmur');
+  showElement('chartTB');
+  showElement('chartTensi');
+
   renderChartUmur(data);
   renderChartTB(data);
   renderChartTensi(data);
 
 }
 
-if(currentPage === 'BALITA'){
+// ======================
+// BALITA
+// ======================
 
-  renderChartGizi(data);
-  renderChartStunting(data);
+if(currentPage.includes('BALITA')){
+
+  showElement('chartUmur');
+
+  hideElement('chartTB');
+  hideElement('chartTensi');
+
+  renderChartUmur(data);
 
 }
 
-if(currentPage === 'REMAJA'){
+// ======================
+// REMAJA
+// ======================
+
+if(currentPage.includes('REMAJA')){
+
+  showElement('chartTB');
+
+  hideElement('chartUmur');
+  hideElement('chartTensi');
 
   renderChartTB(data);
 
 }
 
-if(currentPage === 'DEWASA'){
+// ======================
+// DEWASA
+// ======================
+
+if(currentPage.includes('DEWASA')){
+
+  showElement('chartTB');
+  showElement('chartTensi');
+
+  hideElement('chartUmur');
 
   renderChartTB(data);
-  renderChartGula(data);
   renderChartTensi(data);
 
 }
 
-if(currentPage === 'LANSIA'){
+// ======================
+// LANSIA
+// ======================
+
+if(currentPage.includes('LANSIA')){
+
+  showElement('chartTensi');
+
+  hideElement('chartTB');
+  hideElement('chartUmur');
 
   renderChartTensi(data);
-  renderChartGula(data);
 
 }
 
@@ -584,5 +629,33 @@ function renderChartTensi(data){
       }]
     }
   });
+
+}
+
+function hideElement(id){
+
+  const el =
+  document.getElementById(id);
+
+  if(el){
+
+    el.parentElement.style.display =
+    'none';
+
+  }
+
+}
+
+function showElement(id){
+
+  const el =
+  document.getElementById(id);
+
+  if(el){
+
+    el.parentElement.style.display =
+    'block';
+
+  }
 
 }
