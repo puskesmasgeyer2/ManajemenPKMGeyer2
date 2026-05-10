@@ -36,14 +36,17 @@ async function loadData(){
 
 function renderDashboard(data){
 
+  // ======================
+  // HITUNG CARD
+  // ======================
+
   const bayi = data.filter(x => {
 
-    const umur =
-      String(
-        x['Kelompok Umur'] ||
-        x['Siklus'] ||
-        ''
-      ).toUpperCase();
+    const umur = String(
+      x['Kelompok Umur'] ||
+      x['Siklus'] ||
+      ''
+    ).toUpperCase();
 
     return umur.includes('BAYI');
 
@@ -51,12 +54,11 @@ function renderDashboard(data){
 
   const balita = data.filter(x => {
 
-    const umur =
-      String(
-        x['Kelompok Umur'] ||
-        x['Siklus'] ||
-        ''
-      ).toUpperCase();
+    const umur = String(
+      x['Kelompok Umur'] ||
+      x['Siklus'] ||
+      ''
+    ).toUpperCase();
 
     return umur.includes('BALITA');
 
@@ -64,12 +66,11 @@ function renderDashboard(data){
 
   const remaja = data.filter(x => {
 
-    const umur =
-      String(
-        x['Kelompok Umur'] ||
-        x['Siklus'] ||
-        ''
-      ).toUpperCase();
+    const umur = String(
+      x['Kelompok Umur'] ||
+      x['Siklus'] ||
+      ''
+    ).toUpperCase();
 
     return umur.includes('REMAJA');
 
@@ -77,12 +78,11 @@ function renderDashboard(data){
 
   const dewasa = data.filter(x => {
 
-    const umur =
-      String(
-        x['Kelompok Umur'] ||
-        x['Siklus'] ||
-        ''
-      ).toUpperCase();
+    const umur = String(
+      x['Kelompok Umur'] ||
+      x['Siklus'] ||
+      ''
+    ).toUpperCase();
 
     return umur.includes('DEWASA');
 
@@ -90,12 +90,11 @@ function renderDashboard(data){
 
   const lansia = data.filter(x => {
 
-    const umur =
-      String(
-        x['Kelompok Umur'] ||
-        x['Siklus'] ||
-        ''
-      ).toUpperCase();
+    const umur = String(
+      x['Kelompok Umur'] ||
+      x['Siklus'] ||
+      ''
+    ).toUpperCase();
 
     return umur.includes('LANSIA');
 
@@ -107,88 +106,90 @@ function renderDashboard(data){
   document.getElementById('totalDewasa').innerText = dewasa;
   document.getElementById('totalLansia').innerText = lansia;
 
+  // ======================
+  // TABLE
+  // ======================
+
   renderTable(data);
 
-  if(currentPage === 'DASHBOARD'){
+  // ======================
+  // DASHBOARD
+  // ======================
+
+  if(currentPage.includes('DASHBOARD')){
+
+    showElement('chartUmur');
+    showElement('chartTB');
+    showElement('chartTensi');
+
+    renderChartUmur(data);
+    renderChartTB(data);
+    renderChartTensi(data);
+
+  }
 
   // ======================
-// DASHBOARD UTAMA
-// ======================
+  // BALITA
+  // ======================
 
-if(currentPage.includes('DASHBOARD')){
+  if(currentPage.includes('BALITA')){
 
-  showElement('chartUmur');
-  showElement('chartTB');
-  showElement('chartTensi');
+    showElement('chartUmur');
 
-  renderChartUmur(data);
-  renderChartTB(data);
-  renderChartTensi(data);
+    hideElement('chartTB');
+    hideElement('chartTensi');
+
+    renderChartUmur(data);
+
+  }
+
+  // ======================
+  // REMAJA
+  // ======================
+
+  if(currentPage.includes('REMAJA')){
+
+    showElement('chartTB');
+
+    hideElement('chartUmur');
+    hideElement('chartTensi');
+
+    renderChartTB(data);
+
+  }
+
+  // ======================
+  // DEWASA
+  // ======================
+
+  if(currentPage.includes('DEWASA')){
+
+    showElement('chartTB');
+    showElement('chartTensi');
+
+    hideElement('chartUmur');
+
+    renderChartTB(data);
+    renderChartTensi(data);
+
+  }
+
+  // ======================
+  // LANSIA
+  // ======================
+
+  if(currentPage.includes('LANSIA')){
+
+    showElement('chartTensi');
+
+    hideElement('chartTB');
+    hideElement('chartUmur');
+
+    renderChartTensi(data);
+
+  }
 
 }
-
-// ======================
-// BALITA
-// ======================
-
-if(currentPage.includes('BALITA')){
-
-  showElement('chartUmur');
-
-  hideElement('chartTB');
-  hideElement('chartTensi');
-
-  renderChartUmur(data);
-
-}
-
-// ======================
-// REMAJA
-// ======================
-
-if(currentPage.includes('REMAJA')){
-
-  showElement('chartTB');
-
-  hideElement('chartUmur');
-  hideElement('chartTensi');
-
-  renderChartTB(data);
-
-}
-
-// ======================
-// DEWASA
-// ======================
-
-if(currentPage.includes('DEWASA')){
-
-  showElement('chartTB');
-  showElement('chartTensi');
-
-  hideElement('chartUmur');
-
-  renderChartTB(data);
-  renderChartTensi(data);
-
-}
-
-// ======================
-// LANSIA
-// ======================
-
-if(currentPage.includes('LANSIA')){
-
-  showElement('chartTensi');
-
-  hideElement('chartTB');
-  hideElement('chartUmur');
-
-  renderChartTensi(data);
-
-} // penutup if(currentPage === 'DASHBOARD')
-
-} // penutup function renderDashboard()
 
 function renderTable(data){
 
