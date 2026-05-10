@@ -667,3 +667,140 @@ function renderChartBBTB(data){
 
 }
 
+function renderChartHB(data){
+
+  const labels = [
+    'Normal',
+    'Anemia'
+  ];
+
+  const values = labels.map(label =>
+    data.filter(x =>
+      String(x['Status Hemoglobin'] || '')
+      .trim()
+      .toUpperCase() === label.toUpperCase()
+    ).length
+  );
+
+  createChart('chartHB',{
+    type:'pie',
+    data:{
+      labels:labels,
+      datasets:[{
+        data:values
+      }]
+    }
+  });
+
+}
+
+function renderChartTensi(data){
+
+  const labels = [
+    'Normal',
+    'Pra Hipertensi',
+    'Hipertensi'
+  ];
+
+  const values = labels.map(label =>
+    data.filter(x =>
+      String(x['Status Tensi'] || '')
+      .trim()
+      .toUpperCase() === label.toUpperCase()
+    ).length
+  );
+
+  createChart('chartTensi',{
+    type:'doughnut',
+    data:{
+      labels:labels,
+      datasets:[{
+        data:values
+      }]
+    }
+  });
+
+}
+
+function renderChartGula(data){
+
+  const labels = [
+    'Normal',
+    'Prediabetes',
+    'Diabetes'
+  ];
+
+  const values = labels.map(label =>
+    data.filter(x =>
+      String(x['Status Gula Darah'] || '')
+      .trim()
+      .toUpperCase() === label.toUpperCase()
+    ).length
+  );
+
+  createChart('chartGula',{
+    type:'pie',
+    data:{
+      labels:labels,
+      datasets:[{
+        data:values
+      }]
+    }
+  });
+
+}
+
+function renderChartAsamUrat(data){
+
+  const labels = [
+    'Normal',
+    'Tinggi'
+  ];
+
+  const values = labels.map(label =>
+    data.filter(x =>
+      String(x['Status Asam Urat'] || '')
+      .trim()
+      .toUpperCase() === label.toUpperCase()
+    ).length
+  );
+
+  createChart('chartAsamUrat',{
+    type:'bar',
+    data:{
+      labels:labels,
+      datasets:[{
+        label:'Jumlah',
+        data:values
+      }]
+    }
+  });
+
+}
+
+function renderChartTB(data){
+
+  const labels = [
+    'Suspek TB',
+    'Tidak Suspek'
+  ];
+
+  const values = labels.map(label =>
+    data.filter(x =>
+      String(x['Status TB'] || '')
+      .trim()
+      .toUpperCase() === label.toUpperCase()
+    ).length
+  );
+
+  createChart('chartTB',{
+    type:'doughnut',
+    data:{
+      labels:labels,
+      datasets:[{
+        data:values
+      }]
+    }
+  });
+
+}
