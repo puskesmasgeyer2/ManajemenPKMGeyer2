@@ -105,9 +105,10 @@
 
     .charts-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      grid-template-columns:
+      repeat(auto-fit,minmax(350px,1fr));
       gap:20px;
-      margin-bottom:20px;
+      margin-top:20px;
     }
 
     table{
@@ -211,23 +212,62 @@
     
   <div class="charts-grid">
 
+  <!-- KEHADIRAN -->
   <div class="chart-box">
-    <h3>Kelompok Umur</h3>
-    <canvas id="chartUmur"></canvas>
+    <h3>Jumlah Kehadiran per Siklus</h3>
+    <canvas id="chartKehadiran"></canvas>
   </div>
 
+  <!-- BB/U -->
   <div class="chart-box">
-    <h3>Status TB</h3>
-    <canvas id="chartTB"></canvas>
+    <h3>Status BB/U Balita</h3>
+    <canvas id="chartBBU"></canvas>
   </div>
 
+  <!-- TB/U -->
+  <div class="chart-box">
+    <h3>Status TB/U Balita</h3>
+    <canvas id="chartTBU"></canvas>
+  </div>
+
+  <!-- BB/TB -->
+  <div class="chart-box">
+    <h3>Status BB/TB Balita</h3>
+    <canvas id="chartBBTB"></canvas>
+  </div>
+
+  <!-- HEMOGLOBIN -->
+  <div class="chart-box">
+    <h3>Status Hemoglobin</h3>
+    <canvas id="chartHB"></canvas>
+  </div>
+
+  <!-- TENSI -->
   <div class="chart-box">
     <h3>Status Tensi</h3>
     <canvas id="chartTensi"></canvas>
   </div>
 
-</div>
+  <!-- GULA -->
+  <div class="chart-box">
+    <h3>Status Gula Darah</h3>
+    <canvas id="chartGula"></canvas>
+  </div>
 
+  <!-- ASAM URAT -->
+  <div class="chart-box">
+    <h3>Status Asam Urat</h3>
+    <canvas id="chartAsamUrat"></canvas>
+  </div>
+
+  <!-- TB -->
+  <div class="chart-box">
+    <h3>Status TB</h3>
+    <canvas id="chartTB"></canvas>
+  </div>
+
+</div>
+  
   <div class="chart-box">
 
   <div style="
