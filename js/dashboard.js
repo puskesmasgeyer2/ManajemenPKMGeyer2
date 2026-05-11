@@ -110,6 +110,13 @@ function renderDashboard(data){
   // ======================
 
   renderTable(data);
+
+  if(currentPage === 'BALITA'){
+
+  renderRekapBalita(data);
+
+  }
+
   destroyCharts();
 
   if(currentPage.includes('DASHBOARD')){
@@ -802,5 +809,99 @@ function renderChartTB(data){
       }]
     }
   });
+
+}
+
+function renderRekapBalita(data){
+
+  const tbody =
+    document.getElementById('rekapBalitaBody');
+
+  if(!tbody) return;
+
+  const grup = {};
+
+  data.forEach(x => {
+
+    const pos =
+      x.Posyandu || 'Tanpa Posyandu';
+
+    if(!grup[pos]){
+
+      grup[pos] = [];
+
+    }
+
+    grup[pos].push(x);
+
+  });
+
+  let html = '';
+
+  Object.keys(grup).forEach(pos => {
+
+    const d = grup[pos];
+
+    const bayi =
+      d.filter(x =>
+        String(x['Kelompok Umur'] || '')
+        .toUpperCase()
+        .includes('BAYI')
+      ).length;
+
+    const balita =
+      d.filter(x =>
+        String(x['Kelompok Umur'] || '')
+        .toUpperCase()
+        .includes('BALITA')
+      ).length;
+
+    html += `
+    <tr>
+
+      <td>${pos}</td>
+
+      <td>${bayi}</td>
+      <td>${balita}</td>
+
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+
+      <td>0</td>
+      <td>0</td>
+
+    </tr>
+    `;
+
+  });
+
+  tbody.innerHTML = html;
 
 }
