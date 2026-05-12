@@ -962,6 +962,151 @@ function renderRekapBalita(data){
         .toUpperCase()
         .includes('TINGGI')
       ).length;
+    
+     // =========================
+    // Checklist Perkembangan
+    // =========================
+    const naik =
+      d.filter(x =>
+        String(x['ChecklistPerkembangan'] || '')
+        .toUpperCase()
+        .includes('NAIK')
+      ).length;
+
+    const tidakNaik =
+      d.filter(x =>
+        String(x['ChecklistPerkembangan'] || '')
+        .toUpperCase()
+        .includes('TIDAK')
+      ).length;
+
+    const bawahGMBGO =
+      d.filter(x =>
+        String(x['ChecklistPerkembangan'] || '')
+        .toUpperCase()
+        .includes('BAWAH')
+      ).length;
+
+    const totalPerkembangan =
+      naik + tidakNaik;
+
+    // =========================
+    // LINGKAR KEPALA
+    // =========================
+    const lkNormal =
+      d.filter(x =>
+        String(x['Status Lingkar Kepala'] || '')
+        .toUpperCase()
+        .includes('NORMAL')
+      ).length;
+
+    const lkMicro =
+      d.filter(x =>
+        String(x['Status Lingkar Kepala'] || '')
+        .toUpperCase()
+        .includes('MIKRO')
+      ).length;
+
+    const lkMacro =
+      d.filter(x =>
+        String(x['Status Lingkar Kepala'] || '')
+        .toUpperCase()
+        .includes('MAKRO')
+      ).length;
+
+    // =========================
+    // LILA
+    // =========================
+    const lilaNormal =
+      d.filter(x =>
+        String(x['Status LILA'] || '')
+        .toUpperCase()
+        .includes('NORMAL')
+      ).length;
+
+    const lilaSAM =
+      d.filter(x =>
+        String(x['Status LILA'] || '')
+        .toUpperCase()
+        .includes('SAM')
+      ).length;
+
+    const lilaMAM =
+      d.filter(x =>
+        String(x['Status LILA'] || '')
+        .toUpperCase()
+        .includes('MAM')
+       ).length;
+
+    // =========================
+    // PROGRAM BALITA
+    // =========================
+    const asi =
+      d.filter(x =>
+        String(x['ASI'] || '')
+        .toUpperCase() === 'YA'
+      ).length;
+
+    const mpasi =
+      d.filter(x =>
+        String(x['MPASI'] || '')
+        .toUpperCase() === 'YA'
+      ).length;
+
+    const imunisasi =
+      d.filter(x =>
+        String(x['Imunisasi'] || '')
+        .toUpperCase() === 'YA'
+      ).length;
+
+    const vitamin =
+      d.filter(x =>
+        String(x['VitaminA'] || '')
+        .toUpperCase() === 'YA'
+      ).length;
+
+    const obatCacing =
+      d.filter(x =>
+        String(x['ObatCacing'] || '')
+        .toUpperCase() === 'YA'
+      ).length;
+    
+    const mtLokal =
+      d.filter(x =>
+        String(x['MTPangan'] || '')
+        .toUpperCase() === 'YA'
+      ).length;
+
+    const edukasi =
+      d.filter(x =>
+        String(x['Edukasi'] || '')
+        .toUpperCase() === 'YA'
+      ).length;
+
+    // =========================
+    // SUSPEK TB
+    // =========================
+    const tbSuspek =
+      d.filter(x =>
+        String(x['Status TB'] || '')
+        .toUpperCase()
+        .includes('SUSPEK')
+      ).length;
+
+    // =========================
+    // SAKIT DAN RUJUK
+    // =========================
+    const sakit =
+      d.filter(x =>
+        String(x['GejalaSakit'] || '')
+        .toUpperCase() === 'YA'
+      ).length;
+
+    const rujuk =
+      d.filter(x =>
+        String(x['Rujuk'] || '')
+        .toUpperCase() === 'PUSKESMAS'
+      ).length;
 
     html += `
     <tr>
@@ -971,9 +1116,9 @@ function renderRekapBalita(data){
       <td>${bayi}</td>
       <td>${balita}</td>
 
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>${naik}</td>
+      <td>${tidakNaik}</td>
+      <td>${bawahGMBGO}</td>
 
       <td>${bbBaik}</td>
       <td>${bbKurang}</td>
@@ -985,24 +1130,24 @@ function renderRekapBalita(data){
       <td>${tbPendek}</td>
       <td>${tbTinggi}</td>
 
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>${lkNormal}</td>
+      <td>${lkMicro}</td>
+      <td>${lkMacro}</td>
 
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>${lilaNormal}</td>
+      <td>${lilaSAM}</td>
+      <td>${lilaMAM}</td>
 
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>${asi}</td>
+      <td>${mpasi}</td>
+      <td>${imunisasi}</td>
+      <td>${vitamin}</td>
+      <td>${obatCacing}</td>
+      <td>${mtLokal}</td>
+      <td>${edukasi}</td>
 
-      <td>0</td>
-      <td>0</td>
+      <td>${sakit}</td>
+      <td>${rujuk}</td>
 
     </tr>
     `;
