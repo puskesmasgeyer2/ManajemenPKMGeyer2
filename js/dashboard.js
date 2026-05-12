@@ -997,6 +997,17 @@ function renderRekapBalita(data){
   });
 
   tbody.innerHTML = html;
+  if(html === ''){
+
+  tbody.innerHTML = `
+    <tr>
+      <td colspan="30" style="text-align:center;">
+        Tidak ada data
+      </td>
+    </tr>
+  `;
+
+  }
 
   renderPaginationRekap(keys.length);
 
@@ -1018,6 +1029,40 @@ function renderPaginationRekap(totalRows){
       `Halaman ${currentPageRekap} dari ${totalPages}`;
 
   }
+
+}
+
+const prevRekap =
+document.getElementById('prevPageRekap');
+
+if(prevRekap){
+
+  prevRekap.addEventListener('click', ()=>{
+
+    if(currentPageRekap > 1){
+
+      currentPageRekap--;
+
+      applyFilters();
+
+    }
+
+  });
+
+}
+
+const nextRekap =
+document.getElementById('nextPageRekap');
+
+if(nextRekap){
+
+  nextRekap.addEventListener('click', ()=>{
+
+    currentPageRekap++;
+
+    applyFilters();
+
+  });
 
 }
 
