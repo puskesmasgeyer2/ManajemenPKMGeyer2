@@ -1078,37 +1078,3 @@ if(nextRekap){
   });
 
 }
-
-const prevRekap =
-document.getElementById('prevPageRekap');
-
-if(prevRekap){
-
-  prevRekap.addEventListener('click', ()=>{
-
-    if(currentPageRekap > 1){
-
-      currentPageRekap--;
-
-      applyFilters();
-
-    }
-
-  });
-
-}
-
-const nextRekap =
-document.getElementById('nextPageRekap');
-
-if(nextRekap){
-
-  nextRekap.addEventListener('click', ()=>{
-
-    currentPageRekap++;
-
-    applyFilters();
-
-  });
-
-}
