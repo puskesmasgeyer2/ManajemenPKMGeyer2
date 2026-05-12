@@ -103,12 +103,25 @@ function renderDashboard(data){
 
   }).length;
 
+ if(document.getElementById('totalBayi')){
   document.getElementById('totalBayi').innerText = bayi;
-  document.getElementById('totalBalita').innerText = balita;
-  document.getElementById('totalRemaja').innerText = remaja;
-  document.getElementById('totalDewasa').innerText = dewasa;
-  document.getElementById('totalLansia').innerText = lansia;
+}
 
+if(document.getElementById('totalBalita')){
+  document.getElementById('totalBalita').innerText = balita;
+}
+
+if(document.getElementById('totalRemaja')){
+  document.getElementById('totalRemaja').innerText = remaja;
+}
+
+if(document.getElementById('totalDewasa')){
+  document.getElementById('totalDewasa').innerText = dewasa;
+}
+
+if(document.getElementById('totalLansia')){
+  document.getElementById('totalLansia').innerText = lansia;
+}
   // ======================
   // TABLE
   // ======================
