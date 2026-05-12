@@ -1,5 +1,9 @@
 let currentPageTable = 1;
 const rowsPerPage = 15;
+
+let currentPageRekap = 1;
+const rowsPerPageRekap = 10;
+
 let allData = [];
 
 async function loadData(){
@@ -819,6 +823,10 @@ function renderRekapBalita(data){
 
   if(!tbody) return;
 
+  // =========================
+  // GROUP POSYANDU
+  // =========================
+
   const grup = {};
 
   data.forEach(x => {
@@ -827,20 +835,38 @@ function renderRekapBalita(data){
       x.Posyandu || 'Tanpa Posyandu';
 
     if(!grup[pos]){
-
       grup[pos] = [];
-
     }
 
     grup[pos].push(x);
 
   });
 
+  // =========================
+  // PAGINATION
+  // =========================
+
+  const keys = Object.keys(grup);
+
+  const start =
+    (currentPageRekap - 1)
+    * rowsPerPageRekap;
+
+  const end =
+    start + rowsPerPageRekap;
+
+  const paginatedKeys =
+    keys.slice(start, end);
+
   let html = '';
 
-  Object.keys(grup).forEach(pos => {
+  paginatedKeys.forEach(pos => {
 
     const d = grup[pos];
+
+    // =========================
+    // KEHADIRAN
+    // =========================
 
     const bayi =
       d.filter(x =>
@@ -856,6 +882,74 @@ function renderRekapBalita(data){
         .includes('BALITA')
       ).length;
 
+    // =========================
+    // BB/U
+    // =========================
+
+    const bbBaik =
+      d.filter(x =>
+        String(x['Status Gizi BB/U'] || '')
+        .toUpperCase()
+        .includes('BAIK')
+      ).length;
+
+    const bbKurang =
+      d.filter(x =>
+        String(x['Status Gizi BB/U'] || '')
+        .toUpperCase()
+        .includes('KURANG')
+        ||
+        String(x['Status Gizi BB/U'] || '')
+        .toUpperCase()
+        .includes('BURUK')
+      ).length;
+
+    const bbRisiko =
+      d.filter(x =>
+        String(x['Status Gizi BB/U'] || '')
+        .toUpperCase()
+        .includes('RISIKO')
+      ).length;
+
+    const bbLebih =
+      d.filter(x =>
+        String(x['Status Gizi BB/U'] || '')
+        .toUpperCase()
+        .includes('LEBIH')
+      ).length;
+
+    const bbObesitas =
+      d.filter(x =>
+        String(x['Status Gizi BB/U'] || '')
+        .toUpperCase()
+        .includes('OBESITAS')
+      ).length;
+
+    // =========================
+    // TB/U
+    // =========================
+
+    const tbNormal =
+      d.filter(x =>
+        String(x['Status Stunting (TB/U)'] || '')
+        .toUpperCase()
+        .includes('NORMAL')
+      ).length;
+
+    const tbPendek =
+      d.filter(x =>
+        String(x['Status Stunting (TB/U)'] || '')
+        .toUpperCase()
+        .includes('PENDEK')
+      ).length;
+
+    const tbTinggi =
+      d.filter(x =>
+        String(x['Status Stunting (TB/U)'] || '')
+        .toUpperCase()
+        .includes('TINGGI')
+      ).length;
+
     html += `
     <tr>
 
@@ -868,15 +962,15 @@ function renderRekapBalita(data){
       <td>0</td>
       <td>0</td>
 
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>${bbBaik}</td>
+      <td>${bbKurang}</td>
+      <td>${bbRisiko}</td>
+      <td>${bbLebih}</td>
+      <td>${bbObesitas}</td>
 
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>${tbNormal}</td>
+      <td>${tbPendek}</td>
+      <td>${tbTinggi}</td>
 
       <td>0</td>
       <td>0</td>
@@ -903,5 +997,26 @@ function renderRekapBalita(data){
   });
 
   tbody.innerHTML = html;
+
+  renderPaginationRekap(keys.length);
+
+}
+
+function renderPaginationRekap(totalRows){
+
+  const totalPages =
+    Math.ceil(
+      totalRows / rowsPerPageRekap
+    );
+
+  const info =
+    document.getElementById('pageInfoRekap');
+
+  if(info){
+
+    info.innerText =
+      `Halaman ${currentPageRekap} dari ${totalPages}`;
+
+  }
 
 }
