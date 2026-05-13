@@ -1117,6 +1117,7 @@ function renderRekapBalita(data){
 
       <td>${naik}</td>
       <td>${tidakNaik}</td>
+      <td>${totalPerkembangan}</td>
 
       <td>${bbBaik}</td>
       <td>${bbKurang}</td>
