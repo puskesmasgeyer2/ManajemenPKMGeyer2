@@ -1087,10 +1087,10 @@ function renderRekapBalita(data){
     // SUSPEK TB
     // =========================
     const tbSuspek =
-      d.filter(x =>
+       d.filter(x =>
         String(x['Status TB'] || '')
-        .toUpperCase()
-        .includes('SUSPEK')
+        .trim()
+        .toUpperCase() === 'SUSPEK TB'
       ).length;
 
     // =========================
