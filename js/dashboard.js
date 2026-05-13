@@ -945,22 +945,22 @@ function renderRekapBalita(data){
     const tbNormal =
       d.filter(x =>
         String(x['Status Stunting (TB/U)'] || '')
-        .toUpperCase()
-        .includes('NORMAL')
+        .trim()
+        .toUpperCase() === 'NORMAL'
       ).length;
 
     const tbPendek =
       d.filter(x =>
         String(x['Status Stunting (TB/U)'] || '')
-        .toUpperCase()
-        .includes('PENDEK')
+        .trim()
+        .toUpperCase() === 'PENDEK (STUNTING)'
       ).length;
 
-    const tbsangatPendek =
+    const tbSangatPendek =
       d.filter(x =>
         String(x['Status Stunting (TB/U)'] || '')
-        .toUpperCase()
-        .includes('SANGAT')
+        .trim()
+        .toUpperCase() === 'SANGAT PENDEK'
       ).length;
     
      // =========================
@@ -1127,7 +1127,7 @@ function renderRekapBalita(data){
 
       <td>${tbNormal}</td>
       <td>${tbPendek}</td>
-      <td>${tbsangatPendek}</td>
+      <td>${tbSangatPendek}</td>
 
       <td>${lkNormal}</td>
       <td>${lkMicro}</td>
