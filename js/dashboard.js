@@ -1138,6 +1138,8 @@ function renderRekapBalita(data){
       <td>${lilaSAM}</td>
       <td>${lilaMAM}</td>
 
+      <td>${tbSuspek}</td>
+
       <td>${asi}</td>
       <td>${mpasi}</td>
       <td>${imunisasi}</td>
