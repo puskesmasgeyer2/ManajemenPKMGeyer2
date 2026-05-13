@@ -1117,7 +1117,6 @@ function renderRekapBalita(data){
 
       <td>${naik}</td>
       <td>${tidakNaik}</td>
-      <td>${bawahGMBGO}</td>
 
       <td>${bbBaik}</td>
       <td>${bbKurang}</td>
