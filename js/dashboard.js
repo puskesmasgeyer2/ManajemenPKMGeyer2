@@ -956,11 +956,11 @@ function renderRekapBalita(data){
         .includes('PENDEK')
       ).length;
 
-    const tbTinggi =
+    const tbsangatPendek =
       d.filter(x =>
         String(x['Status Stunting (TB/U)'] || '')
         .toUpperCase()
-        .includes('TINGGI')
+        .includes('SANGAT')
       ).length;
     
      // =========================
@@ -1127,7 +1127,7 @@ function renderRekapBalita(data){
 
       <td>${tbNormal}</td>
       <td>${tbPendek}</td>
-      <td>${tbTinggi}</td>
+      <td>${tbsangatPendek}</td>
 
       <td>${lkNormal}</td>
       <td>${lkMicro}</td>
