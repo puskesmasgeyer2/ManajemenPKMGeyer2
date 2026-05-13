@@ -968,24 +968,23 @@ function renderRekapBalita(data){
     // =========================
     const naik =
       d.filter(x =>
-        String(x['ChecklistPerkembangan'] || '')
-        .toUpperCase()
-        .includes('NAIK')
+        String(x['ChecklistPerkemBB'] || '')
+        .trim()
+        .toUpperCase() === 'NAIK'
       ).length;
-
+    
     const tidakNaik =
-      d.filter(x =>
-        String(x['ChecklistPerkembangan'] || '')
-        .toUpperCase()
-        .includes('TIDAK')
-      ).length;
+      d.filter(x => {
+      const val = String(x['ChecklistPerkemBB'] || '')
+        .trim()
+        .toUpperCase();
 
-    const bawahGMBGO =
-      d.filter(x =>
-        String(x['ChecklistPerkembangan'] || '')
-        .toUpperCase()
-        .includes('BAWAH')
-      ).length;
+        return (
+        val === 'TIDAK NAIK' ||
+        val === 'BAWAH GARIS MERAH' ||
+        val === 'BAWAH GARIS ORANYE'
+        );
+      }).length;
 
     const totalPerkembangan =
       naik + tidakNaik;
