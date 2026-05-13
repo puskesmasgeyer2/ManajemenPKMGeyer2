@@ -968,14 +968,14 @@ function renderRekapBalita(data){
     // =========================
     const naik =
       d.filter(x =>
-        String(x['ChecklistPerkemBB'] || '')
+        String(x['ChecklistPerkembangan'] || '')
         .trim()
         .toUpperCase() === 'NAIK'
       ).length;
     
     const tidakNaik =
       d.filter(x => {
-      const val = String(x['ChecklistPerkemBB'] || '')
+      const val = String(x['ChecklistPerkembangan'] || '')
         .trim()
         .toUpperCase();
 
