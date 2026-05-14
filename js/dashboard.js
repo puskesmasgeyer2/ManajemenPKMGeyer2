@@ -1456,6 +1456,43 @@ function renderRekapDewasa(data){
 
   tbody.innerHTML = html;
 
+  if(currentPage === 'DEWASA'){
+  return `
+
+    <tr>
+
+      <td>${r.Nama || ''}</td>
+
+      <td>${r.NIK || ''}</td>
+
+      <td>${r['Status IMT'] || ''}</td>
+
+      <td>${r.LingkarPerut || ''}</td>
+
+      <td>${r['Status Tensi'] || ''}</td>
+
+      <td>${r['Status Gula Darah'] || ''}</td>
+
+      <td>${r['Status Asam Urat'] || ''}</td>
+
+      <td>${r['Status Kolesterol'] || ''}</td>
+
+      <td>${r['Skor PUMA'] || ''}</td>
+
+      <td>${
+        Number(r['Skor PUMA']) >= 6
+        ? 'Tinggi'
+        : 'Normal'
+      }</td>
+
+      <td>${r.Edukasi || ''}</td>
+
+      <td>${r.Rujuk || ''}</td>
+
+    </tr>
+
+    `;
+  }
 }
 
 function renderPaginationRekap(totalRows){
