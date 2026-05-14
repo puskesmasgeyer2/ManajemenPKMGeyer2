@@ -589,6 +589,7 @@ document
   applyFilters();
 
 }
+});
 
 function hideElement(id){
 
@@ -1308,7 +1309,7 @@ function renderRekapDewasa(data){
       d.filter(x =>
         String(x['Status IMT'] || '')
         .toUpperCase()
-        .includes('Normal')
+        .includes('NORMAL')
       ).length;
 
     const gemuk =
@@ -1363,7 +1364,7 @@ function renderRekapDewasa(data){
       d.filter(x =>
         String(x['Status Tensi'] || '')
         .toUpperCase()
-        .includes('Normal')
+        .includes('NORMAL')
       ).length;
 
     const praHT =
@@ -1392,7 +1393,7 @@ function renderRekapDewasa(data){
       d.filter(x =>
         String(x['Status Gula Darah'] || '')
         .toUpperCase()
-        .includes('Normal')
+        .includes('NORMAL')
       ).length;
 
     const prediabetes =
@@ -1415,7 +1416,7 @@ function renderRekapDewasa(data){
       d.filter(x =>
         String(x['Status Asam Urat'] || '')
         .toUpperCase()
-        .includes('Normal')
+        .includes('NORMAL')
       ).length;
 
     const asamTinggi =
@@ -1432,7 +1433,7 @@ function renderRekapDewasa(data){
       d.filter(x =>
         String(x['Status Kolesterol'] || '')
         .toUpperCase()
-        .includes('Normal')
+        .includes('NORMAL')
       ).length;
 
     const kolTinggi =
