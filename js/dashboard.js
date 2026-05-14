@@ -351,7 +351,6 @@ function applyFilters(resetPage = false){
   }
 
   let data = [...allData];
-}
 
   // ======================
 // FILTER HALAMAN
