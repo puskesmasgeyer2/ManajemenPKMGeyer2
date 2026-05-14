@@ -324,30 +324,34 @@ setInterval(()=>{
 
 document
 .getElementById('filterBulan')
-.addEventListener('change', applyFilters);
+.addEventListener('change', ()=>applyFilters(true));
 
 document
 .getElementById('filterDesa')
-.addEventListener('change', applyFilters);
+.addEventListener('change', ()=>applyFilters(true));
 
 document
 .getElementById('filterPosyandu')
-.addEventListener('change', applyFilters);
+.addEventListener('change', ()=>applyFilters(true));
 
 document
 .getElementById('searchNama')
-.addEventListener('input', applyFilters);
+.addEventListener('change', ()=>applyFilters(true));
 
 
 // =====================================
 // APPLY FILTER
 // =====================================
 
-function applyFilters(){
-  
-  currentPageTable = 1;
+function applyFilters(resetPage = false){
+
+  if(resetPage){
+    currentPageTable = 1;
+    currentPageRekap = 1;
+  }
 
   let data = [...allData];
+}
 
   // ======================
 // FILTER HALAMAN
