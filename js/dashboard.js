@@ -180,16 +180,43 @@ function renderTable(data){
   paginated.forEach(r=>{
 
     html += `
-      <tr>
+    <tr>
+
         <td>${r.Nama || ''}</td>
+
         <td>${r.NIK || ''}</td>
-        <td>${r['Kelompok Umur'] || ''}</td>
-        <td>${r['Status Gizi BB/TB'] || ''}</td>
+
+        <td>${r['ChecklistPerkembangan'] || ''}</td>
+
+        <td>${r['Status Gizi BB/U'] || ''}</td>
+
         <td>${r['Status Stunting (TB/U)'] || ''}</td>
+
+        <td>${r['Status Lingkar Kepala'] || ''}</td>
+
+        <td>${r['Status LILA'] || ''}</td>
+
         <td>${r['Status TB'] || ''}</td>
-        <td>${r['Status Gula Darah'] || ''}</td>
-        <td>${r['Status Tensi'] || ''}</td>
-      </tr>
+
+        <td>${r['ASI'] || ''}</td>
+
+        <td>${r['MPASI'] || ''}</td>
+
+        <td>${r['Imunisasi'] || ''}</td>
+
+        <td>${r['VitaminA'] || ''}</td>
+
+        <td>${r['ObatCacing'] || ''}</td>
+
+        <td>${r['MTPangan'] || ''}</td>
+
+        <td>${r['Edukasi'] || ''}</td>
+
+        <td>${r['GejalaSakit'] || ''}</td>
+
+        <td>${r['Rujuk'] || ''}</td>
+
+    </tr>
     `;
 
   });
