@@ -180,51 +180,107 @@
     </select>
 </div>
 
-  <div class="cards">
+<div class="chart-box">
 
-  <div class="card">
-    <h2 id="totalBayi">0</h2>
-    <p>Bayi</p>
-  </div>
+<h3>Rekap Dewasa per Posyandu</h3>
 
-  <div class="card">
-    <h2 id="totalBalita">0</h2>
-    <p>Balita</p>
-  </div>
+<div style="overflow:auto;">
 
-  <div class="card">
-    <h2 id="totalRemaja">0</h2>
-    <p>Remaja</p>
-  </div>
+<table id="rekapDewasa">
 
-  <div class="card">
-    <h2 id="totalDewasa">0</h2>
-    <p>Dewasa</p>
-  </div>
+<thead>
 
-  <div class="card">
-    <h2 id="totalLansia">0</h2>
-    <p>Lansia</p>
+<tr>
+
+<th rowspan="2">Posyandu</th>
+
+<th colspan="2">Kehadiran</th>
+
+<th colspan="3">Perkembangan</th>
+
+<th colspan="5">BB/U</th>
+
+<th colspan="3">TB/U</th>
+
+<th colspan="3">Lingkar Kepala</th>
+
+<th colspan="3">LILA</th>
+
+<th rowspan="2">Suspek TB</th>
+
+<th colspan="7">Intervensi Bayi</th>
+
+<th rowspan="2">Balita Sakit</th>
+
+<th rowspan="2">Dirujuk</th>
+
+</tr>
+
+<tr>
+
+<th>Bayi</th>
+<th>Balita</th>
+
+<th>Naik</th>
+<th>Tidak Naik/BGM/BGO</th>
+<th>Total</th>
+
+<th>Baik</th>
+<th>Kurang/Buruk</th>
+<th>Risiko Lebih</th>
+<th>Lebih</th>
+<th>Obesitas</th>
+
+<th>Normal</th>
+<th>Pendek</th>
+<th>Sangat Pendek</th>
+
+<th>Normal</th>
+<th>Mikrosefali</th>
+<th>Makrosefali</th>
+
+<th>Normal</th>
+<th>SAM</th>
+<th>MAM</th>
+
+<th>ASI</th>
+<th>MPASI</th>
+<th>Imunisasi</th>
+<th>Vit A</th>
+<th>Obat Cacing</th>
+<th>MT Lokal</th>
+<th>Edukasi</th>
+
+</tr>
+
+</thead>
+
+<tbody id="rekapBalitaBody"></tbody>
+
+</table>
+  <div id="paginationRekap" style="
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:15px;
+  align-items:center;
+">
+
+  <button id="prevPageRekap">
+    Sebelumnya
+  </button>
+
+  <span id="pageInfoRekap">
+    1
+  </span>
+
+  <button id="nextPageRekap">
+    Berikutnya
+  </button>
+
   </div>
 
 </div>
-    
-  <div class="charts-grid">
-
-  <div class="chart-box">
-    <h3>Kelompok Umur</h3>
-    <canvas id="chartUmur"></canvas>
-  </div>
-
-  <div class="chart-box">
-    <h3>Status TB</h3>
-    <canvas id="chartTB"></canvas>
-  </div>
-
-  <div class="chart-box">
-    <h3>Status Tensi</h3>
-    <canvas id="chartTensi"></canvas>
-  </div>
 
 </div>
 
@@ -254,16 +310,43 @@
     <table id="tableData">
 
       <thead>
-        <tr>
-          <th>Nama</th>
-          <th>NIK</th>
-          <th>Kelompok Umur</th>
-          <th>Status Gizi BB/TB</th>
-          <th>Status Stunting</th>
-          <th>Status TB</th>
-          <th>Status Gula</th>
-          <th>Status Tensi</th>
-        </tr>
+      <tr>
+
+        <th>Nama</th>
+
+        <th>NIK</th>
+
+        <th>Checklist Perkembangan</th>
+
+        <th>Status BB/U</th>
+
+        <th>Status TB/U</th>
+
+        <th>Status Lingkar Kepala</th>
+
+        <th>Status LILA</th>
+
+        <th>Status TB</th>
+
+        <th>ASI Eksklusif</th>
+
+        <th>MPASI</th>
+
+        <th>Imunisasi</th>
+
+        <th>Vitamin A</th>
+
+        <th>Obat Cacing</th>
+
+        <th>MT Pangan Lokal</th>
+
+        <th>Edukasi</th>
+
+        <th>Gejala Sakit</th>
+
+        <th>Rujuk</th>
+
+      </tr>
       </thead>
 
       <tbody></tbody>
