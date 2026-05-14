@@ -131,6 +131,12 @@ if(document.getElementById('totalLansia')){
   if(currentPage === 'BALITA'){
 
   renderRekapBalita(data);
+  
+  }
+
+  if(currentPage === 'DEWASA'){
+
+  renderRekapDewasa(data);
 
   }
 
@@ -1199,6 +1205,256 @@ function renderRekapBalita(data){
   }
 
   renderPaginationRekap(keys.length);
+
+}
+
+function renderRekapDewasa(data){
+
+  const tbody =
+    document.getElementById('rekapDewasaBody');
+
+  if(!tbody) return;
+
+  const grup = {};
+
+  data.forEach(x=>{
+
+    const pos =
+      x.Posyandu || 'Tanpa Posyandu';
+
+    if(!grup[pos]){
+      grup[pos] = [];
+    }
+
+    grup[pos].push(x);
+
+  });
+
+  let html = '';
+
+  Object.keys(grup).forEach(pos=>{
+
+    const d = grup[pos];
+
+    // ======================
+    // IMT
+    // ======================
+
+    const kurus =
+      d.filter(x =>
+        String(x['Status IMT'] || '')
+        .includes('Kurus')
+      ).length;
+
+    const normal =
+      d.filter(x =>
+        String(x['Status IMT'] || '')
+        .includes('Normal')
+      ).length;
+
+    const gemuk =
+      d.filter(x =>
+        String(x['Status IMT'] || '')
+        .includes('Gemuk')
+      ).length;
+
+    const obesitas =
+      d.filter(x =>
+        String(x['Status IMT'] || '')
+        .includes('Obesitas')
+      ).length;
+
+    // ======================
+    // LINGKAR PERUT
+    // ======================
+
+    const lpLaki =
+      d.filter(x => {
+
+        const lp =
+          parseFloat(x['LingkarPerut']) || 0;
+
+        return (
+          String(x['JenisKelamin'])
+          .includes('Laki')
+          && lp > 90
+        );
+
+      }).length;
+
+    const lpPerempuan =
+      d.filter(x => {
+
+        const lp =
+          parseFloat(x['LingkarPerut']) || 0;
+
+        return (
+          String(x['JenisKelamin'])
+          .includes('Perempuan')
+          && lp > 80
+        );
+
+      }).length;
+
+    // ======================
+    // TENSI
+    // ======================
+
+    const tensiNormal =
+      d.filter(x =>
+        String(x['Status Tensi'] || '')
+        .includes('Normal')
+      ).length;
+
+    const praHT =
+      d.filter(x =>
+        String(x['Status Tensi'] || '')
+        .includes('Pra')
+      ).length;
+
+    const ht1 =
+      d.filter(x =>
+        String(x['Status Tensi'] || '')
+        .includes('Hipertensi 1')
+      ).length;
+
+    const ht2 =
+      d.filter(x =>
+        String(x['Status Tensi'] || '')
+        .includes('Hipertensi 2')
+      ).length;
+
+    // ======================
+    // GULA
+    // ======================
+
+    const gulaNormal =
+      d.filter(x =>
+        String(x['Status Gula Darah'] || '')
+        .includes('Normal')
+      ).length;
+
+    const prediabetes =
+      d.filter(x =>
+        String(x['Status Gula Darah'] || '')
+        .includes('Prediabetes')
+      ).length;
+
+    const diabetes =
+      d.filter(x =>
+        String(x['Status Gula Darah'] || '')
+        .includes('Diabetes')
+      ).length;
+
+    // ======================
+    // ASAM URAT
+    // ======================
+
+    const asamNormal =
+      d.filter(x =>
+        String(x['Status Asam Urat'] || '')
+        .includes('Normal')
+      ).length;
+
+    const asamTinggi =
+      d.filter(x =>
+        String(x['Status Asam Urat'] || '')
+        .includes('Tinggi')
+      ).length;
+
+    // ======================
+    // KOLESTEROL
+    // ======================
+
+    const kolNormal =
+      d.filter(x =>
+        String(x['Status Kolesterol'] || '')
+        .includes('Normal')
+      ).length;
+
+    const kolTinggi =
+      d.filter(x =>
+        String(x['Status Kolesterol'] || '')
+        .includes('Tinggi')
+      ).length;
+
+    // ======================
+    // PUMA
+    // ======================
+
+    const pumaNormal =
+      d.filter(x =>
+        Number(x['Skor PUMA']) < 6
+      ).length;
+
+    const pumaTinggi =
+      d.filter(x =>
+        Number(x['Skor PUMA']) >= 6
+      ).length;
+
+    // ======================
+    // EDUKASI
+    // ======================
+
+    const edukasi =
+      d.filter(x =>
+        String(x['Edukasi'] || '')
+        === 'Ya'
+      ).length;
+
+    // ======================
+    // RUJUK
+    // ======================
+
+    const rujuk =
+      d.filter(x =>
+        String(x['Rujuk'] || '')
+        .includes('Puskesmas')
+      ).length;
+
+    html += `
+
+    <tr>
+
+    <td>${pos}</td>
+
+    <td>${kurus}</td>
+    <td>${normal}</td>
+    <td>${gemuk}</td>
+    <td>${obesitas}</td>
+
+    <td>${lpLaki}</td>
+    <td>${lpPerempuan}</td>
+
+    <td>${tensiNormal}</td>
+    <td>${praHT}</td>
+    <td>${ht1}</td>
+    <td>${ht2}</td>
+
+    <td>${gulaNormal}</td>
+    <td>${prediabetes}</td>
+    <td>${diabetes}</td>
+
+    <td>${asamNormal}</td>
+    <td>${asamTinggi}</td>
+
+    <td>${kolNormal}</td>
+    <td>${kolTinggi}</td>
+
+    <td>${pumaNormal}</td>
+    <td>${pumaTinggi}</td>
+
+    <td>${edukasi}</td>
+
+    <td>${rujuk}</td>
+
+    </tr>
+
+    `;
+
+  });
+
+  tbody.innerHTML = html;
 
 }
 
