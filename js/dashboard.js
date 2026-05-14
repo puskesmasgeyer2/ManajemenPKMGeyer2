@@ -185,48 +185,101 @@ function renderTable(data){
 
   paginated.forEach(r=>{
 
+  // =========================
+  // TABEL DEWASA
+  // =========================
+
+  if(currentPage === 'DEWASA'){
+
     html += `
+
     <tr>
 
-        <td>${r.Nama || ''}</td>
+      <td>${r.Nama || ''}</td>
 
-        <td>${r.NIK || ''}</td>
+      <td>${r.NIK || ''}</td>
 
-        <td>${r['ChecklistPerkembangan'] || ''}</td>
+      <td>${r['Status IMT'] || ''}</td>
 
-        <td>${r['Status Gizi BB/U'] || ''}</td>
+      <td>${r['LingkarPerut'] || ''}</td>
 
-        <td>${r['Status Stunting (TB/U)'] || ''}</td>
+      <td>${r['Status Tensi'] || ''}</td>
 
-        <td>${r['Status Lingkar Kepala'] || ''}</td>
+      <td>${r['Status Gula Darah'] || ''}</td>
 
-        <td>${r['Status LILA'] || ''}</td>
+      <td>${r['Status Asam Urat'] || ''}</td>
 
-        <td>${r['Status TB'] || ''}</td>
+      <td>${r['Status Kolesterol'] || ''}</td>
 
-        <td>${r['ASI'] || ''}</td>
+      <td>${r['Skor PUMA'] || ''}</td>
 
-        <td>${r['MPASI'] || ''}</td>
+      <td>${
+        Number(r['Skor PUMA']) >= 6
+        ? 'Tinggi'
+        : 'Normal'
+      }</td>
 
-        <td>${r['Imunisasi'] || ''}</td>
+      <td>${r['Edukasi'] || ''}</td>
 
-        <td>${r['VitaminA'] || ''}</td>
-
-        <td>${r['ObatCacing'] || ''}</td>
-
-        <td>${r['MTPangan'] || ''}</td>
-
-        <td>${r['Edukasi'] || ''}</td>
-
-        <td>${r['GejalaSakit'] || ''}</td>
-
-        <td>${r['Rujuk'] || ''}</td>
+      <td>${r['Rujuk'] || ''}</td>
 
     </tr>
+
     `;
 
-  });
+  }
 
+  // =========================
+  // TABEL BALITA
+  // =========================
+
+  else{
+
+    html += `
+
+    <tr>
+
+      <td>${r.Nama || ''}</td>
+
+      <td>${r.NIK || ''}</td>
+
+      <td>${r['ChecklistPerkembangan'] || ''}</td>
+
+      <td>${r['Status Gizi BB/U'] || ''}</td>
+
+      <td>${r['Status Stunting (TB/U)'] || ''}</td>
+
+      <td>${r['Status Lingkar Kepala'] || ''}</td>
+
+      <td>${r['Status LILA'] || ''}</td>
+
+      <td>${r['Status TB'] || ''}</td>
+
+      <td>${r['ASI'] || ''}</td>
+
+      <td>${r['MPASI'] || ''}</td>
+
+      <td>${r['Imunisasi'] || ''}</td>
+
+      <td>${r['VitaminA'] || ''}</td>
+
+      <td>${r['ObatCacing'] || ''}</td>
+
+      <td>${r['MTPangan'] || ''}</td>
+
+      <td>${r['Edukasi'] || ''}</td>
+
+      <td>${r['GejalaSakit'] || ''}</td>
+
+      <td>${r['Rujuk'] || ''}</td>
+
+    </tr>
+
+    `;
+
+  }
+
+});
   tbody.innerHTML = html;
 
   renderPagination(data.length);
@@ -526,11 +579,16 @@ document
 .getElementById('nextPage')
 .addEventListener('click', ()=>{
 
+  const totalPages =
+  Math.ceil(allData.length / rowsPerPage);
+
+  if(currentPageTable < totalPages){
+
   currentPageTable++;
 
   applyFilters();
 
-});
+}
 
 function hideElement(id){
 
@@ -1249,6 +1307,7 @@ function renderRekapDewasa(data){
     const normal =
       d.filter(x =>
         String(x['Status IMT'] || '')
+        .toUpperCase()
         .includes('Normal')
       ).length;
 
@@ -1303,6 +1362,7 @@ function renderRekapDewasa(data){
     const tensiNormal =
       d.filter(x =>
         String(x['Status Tensi'] || '')
+        .toUpperCase()
         .includes('Normal')
       ).length;
 
@@ -1331,6 +1391,7 @@ function renderRekapDewasa(data){
     const gulaNormal =
       d.filter(x =>
         String(x['Status Gula Darah'] || '')
+        .toUpperCase()
         .includes('Normal')
       ).length;
 
@@ -1353,6 +1414,7 @@ function renderRekapDewasa(data){
     const asamNormal =
       d.filter(x =>
         String(x['Status Asam Urat'] || '')
+        .toUpperCase()
         .includes('Normal')
       ).length;
 
@@ -1369,6 +1431,7 @@ function renderRekapDewasa(data){
     const kolNormal =
       d.filter(x =>
         String(x['Status Kolesterol'] || '')
+        .toUpperCase()
         .includes('Normal')
       ).length;
 
@@ -1456,43 +1519,6 @@ function renderRekapDewasa(data){
 
   tbody.innerHTML = html;
 
-  if(currentPage === 'DEWASA'){
-  return `
-
-    <tr>
-
-      <td>${r.Nama || ''}</td>
-
-      <td>${r.NIK || ''}</td>
-
-      <td>${r['Status IMT'] || ''}</td>
-
-      <td>${r.LingkarPerut || ''}</td>
-
-      <td>${r['Status Tensi'] || ''}</td>
-
-      <td>${r['Status Gula Darah'] || ''}</td>
-
-      <td>${r['Status Asam Urat'] || ''}</td>
-
-      <td>${r['Status Kolesterol'] || ''}</td>
-
-      <td>${r['Skor PUMA'] || ''}</td>
-
-      <td>${
-        Number(r['Skor PUMA']) >= 6
-        ? 'Tinggi'
-        : 'Normal'
-      }</td>
-
-      <td>${r.Edukasi || ''}</td>
-
-      <td>${r.Rujuk || ''}</td>
-
-    </tr>
-
-    `;
-  }
 }
 
 function renderPaginationRekap(totalRows){
