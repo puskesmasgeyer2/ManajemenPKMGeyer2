@@ -344,9 +344,9 @@ function renderTable(data){
 
       <td>${r['Status Kolesterol'] || ''}</td>
 
-      <td>${statusPUMA(r)}</td>
-      
       <td>${hitungSkorPUMA(r)}</td>
+      
+      <td>${statusPUMA(r)}</td>
 
       <td>${r['Edukasi'] || ''}</td>
 
