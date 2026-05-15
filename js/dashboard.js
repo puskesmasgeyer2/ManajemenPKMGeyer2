@@ -46,47 +46,31 @@ async function loadData(){
 
   }
 
-  // =====================================
-  // HITUNG SKOR PUMA
-  // =====================================
+// ======================
+// SKOR PUMA
+// ======================
 
-  function hitungSkorPUMA(r){
+let skorPuma = 0;
 
-      let skor = 0;
+// MEROKOK
+const rokok = (r['Dewasa_Merokok'] || '').trim();
 
-      // UMUR >= 40
-      if(parseFloat(r['Umur']) >= 40){
-      skor += 1;
-      }
+if (rokok === '20–30 bungkus/tahun') skorPuma += 1;
+if (rokok === '> 30 bungkus/tahun') skorPuma += 2;
 
-      // MEROKOK
-      if(
-      String(r['Merokok'] || '')
-      .toUpperCase() === 'YA'
-      ){
-      skor += 1;
-      }
+// NAPAS
+if ((r['Dewasa_Napas'] || '') === 'Ya') skorPuma += 1;
 
-      // SESAK NAPAS
-      if(
-      String(r['Dewasa_Napas'] || '')
-      .toUpperCase() === 'YA'
-      ){
-      skor += 1;
-      }
+// DAHAK
+if ((r['Dewasa_Dahak'] || '') === 'Ya') skorPuma += 1;
 
-      // BATUK
-      if(
-      String(r['Dewasa_Batuk'] || '')
-      .toUpperCase() === 'YA'
-      ){
-      skor += 1;
-      }
+// BATUK
+if ((r['Dewasa_Batuk'] || '') === 'Ya') skorPuma += 1;
 
-      return skor;
+// TES TIUP
+if ((r['Dewasa_TesTiup'] || '') === 'Ya') skorPuma += 1;
 
-  }
-
+const statusPuma = skorPuma >= 6 ? 'Tinggi' : 'Normal';
 // =====================================
 // STATUS PUMA
 // =====================================
