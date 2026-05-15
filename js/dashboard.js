@@ -46,31 +46,99 @@ async function loadData(){
 
   }
 
-// ======================
-// SKOR PUMA
-// ======================
+// =====================================
+// HITUNG SKOR PUMA
+// =====================================
 
-let skorPuma = 0;
+function hitungSkorPUMA(r){
 
-// MEROKOK
-const rokok = (r['Dewasa_Merokok'] || '').trim();
+  let skor = 0;
 
-if (rokok === '20–30 bungkus/tahun') skorPuma += 1;
-if (rokok === '> 30 bungkus/tahun') skorPuma += 2;
+  // =========================
+  // UMUR
+  // =========================
 
-// NAPAS
-if ((r['Dewasa_Napas'] || '') === 'Ya') skorPuma += 1;
+  const umur =
+    parseFloat(r['Umur (Bulan)']) || 0;
 
-// DAHAK
-if ((r['Dewasa_Dahak'] || '') === 'Ya') skorPuma += 1;
+  if(umur >= 50 && umur <= 59){
+    skor += 1;
+  }
 
-// BATUK
-if ((r['Dewasa_Batuk'] || '') === 'Ya') skorPuma += 1;
+  else if(umur >= 60){
+    skor += 2;
+  }
 
-// TES TIUP
-if ((r['Dewasa_TesTiup'] || '') === 'Ya') skorPuma += 1;
+  // =========================
+  // MEROKOK
+  // =========================
 
-const statusPuma = skorPuma >= 6 ? 'Tinggi' : 'Normal';
+  const rokok =
+    String(r['Dewasa_Merokok'] || '')
+    .trim();
+
+  if(rokok.includes('20–30')){
+    skor += 1;
+  }
+
+  else if(
+    rokok.includes('> 30')
+  ){
+    skor += 2;
+  }
+
+  // =========================
+  // NAPAS PENDEK
+  // =========================
+
+  if(
+    String(r['Dewasa_Napas'] || '')
+    .trim()
+    .toUpperCase() === 'YA'
+  ){
+    skor += 1;
+  }
+
+  // =========================
+  // DAHAK
+  // =========================
+
+  if(
+    String(r['Dewasa_Dahak'] || '')
+    .trim()
+    .toUpperCase() === 'YA'
+  ){
+    skor += 1;
+  }
+
+  // =========================
+  // BATUK
+  // =========================
+
+  if(
+    String(r['Dewasa_Batuk'] || '')
+    .trim()
+    .toUpperCase() === 'YA'
+  ){
+    skor += 1;
+  }
+
+  // =========================
+  // TES TIUP
+  // =========================
+
+  if(
+    String(r['Dewasa_TesTiup'] || '')
+    .trim()
+    .toUpperCase() === 'YA'
+  ){
+    skor += 1;
+  }
+
+  return skor;
+
+}
+  
 // =====================================
 // STATUS PUMA
 // =====================================
