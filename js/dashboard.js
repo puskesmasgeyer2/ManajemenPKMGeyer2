@@ -322,129 +322,128 @@ function renderTable(data){
   paginated.forEach(r=>{
 
   // =========================
-  // TABEL DEWASA
-  // =========================
+// TABEL DEWASA
+// =========================
 
-  if(currentPage === 'DEWASA'){
+if(currentPage === 'DEWASA'){
 
-    html += `
+  html += `
 
-    <tr>
+  <tr>
 
-      <td>${r.Nama || ''}</td>
+    <td>${r.Nama || ''}</td>
 
-      <td>${r.NIK || ''}</td>
+    <td>${r.NIK || ''}</td>
 
-      <td>${hitungIMT(r['BB'], r['TB'])}</td>
+    <td>${hitungIMT(r['BB'], r['TB'])}</td>
 
-      <td>${r['LingkarPerut'] || ''}</td>
+    <td>${r['LingkarPerut'] || ''}</td>
 
-      <td>${r['Status Tensi'] || ''}</td>
+    <td>${r['Status Tensi'] || ''}</td>
 
-      <td>${r['Status Gula Darah'] || ''}</td>
+    <td>${r['Status Gula Darah'] || ''}</td>
 
-      <td>${r['Status Asam Urat'] || ''}</td>
+    <td>${r['Status Asam Urat'] || ''}</td>
 
-      <td>${r['Status Kolesterol'] || ''}</td>
+    <td>${r['Status Kolesterol'] || ''}</td>
 
-      <td>${hitungSkorPUMA(r)}</td>
-      
-      <td>${statusPUMA(r)}</td>
+    <td>${hitungSkorPUMA(r)}</td>
 
-      <td>${r['Status TB'] || ''}</td>
+    <td>${statusPUMA(r)}</td>
 
-      <td>${r['Edukasi'] || ''}</td>
+    <td>${r['Status TB'] || ''}</td>
 
-      <td>${r['Rujuk'] || ''}</td>
+    <td>${r['Edukasi'] || ''}</td>
 
-    </tr>
+    <td>${r['Rujuk'] || ''}</td>
 
-    `;
+  </tr>
 
-  }
+  `;
 
-  // =========================
-  // TABEL BALITA
-  // =========================
+}
 
-  else{
+// =========================
+// TABEL DASHBOARD
+// =========================
 
-    html += `
+else if(currentPage.includes('DASHBOARD')){
 
-    <tr>
+  html += `
 
-      <td>${r.Nama || ''}</td>
+  <tr>
 
-      <td>${r.NIK || ''}</td>
+    <td>${r.Nama || ''}</td>
 
-      <td>${r['ChecklistPerkembangan'] || ''}</td>
+    <td>${r.NIK || ''}</td>
 
-      <td>${r['Status Gizi BB/U'] || ''}</td>
+    <td>${r['Kelompok Umur'] || ''}</td>
 
-      <td>${r['Status Stunting (TB/U)'] || ''}</td>
+    <td>${r['Status Gizi BB/TB'] || ''}</td>
 
-      <td>${r['Status Lingkar Kepala'] || ''}</td>
+    <td>${r['Status Stunting (TB/U)'] || ''}</td>
 
-      <td>${r['Status LILA'] || ''}</td>
+    <td>${r['Status TB'] || ''}</td>
 
-      <td>${r['Status TB'] || ''}</td>
+    <td>${r['Status Gula Darah'] || ''}</td>
 
-      <td>${r['ASI'] || ''}</td>
+    <td>${r['Status Tensi'] || ''}</td>
 
-      <td>${r['MPASI'] || ''}</td>
+  </tr>
 
-      <td>${r['Imunisasi'] || ''}</td>
+  `;
 
-      <td>${r['VitaminA'] || ''}</td>
+}
 
-      <td>${r['ObatCacing'] || ''}</td>
+// =========================
+// TABEL BALITA / REMAJA / LANSIA
+// =========================
 
-      <td>${r['MTPangan'] || ''}</td>
+else{
 
-      <td>${r['Edukasi'] || ''}</td>
+  html += `
 
-      <td>${r['GejalaSakit'] || ''}</td>
+  <tr>
 
-      <td>${r['Rujuk'] || ''}</td>
+    <td>${r.Nama || ''}</td>
 
-    </tr>
+    <td>${r.NIK || ''}</td>
 
-    `;
+    <td>${r['ChecklistPerkembangan'] || ''}</td>
 
-  }
+    <td>${r['Status Gizi BB/U'] || ''}</td>
 
-    // =========================
-    // TABEL DASHBOARD
-    // =========================
+    <td>${r['Status Stunting (TB/U)'] || ''}</td>
 
-    else if(currentPage.includes('DASHBOARD')){
+    <td>${r['Status Lingkar Kepala'] || ''}</td>
 
-    html += `
+    <td>${r['Status LILA'] || ''}</td>
 
-    <tr>
+    <td>${r['Status TB'] || ''}</td>
 
-        <td>${r.Nama || ''}</td>
+    <td>${r['ASI'] || ''}</td>
 
-        <td>${r.NIK || ''}</td>
+    <td>${r['MPASI'] || ''}</td>
 
-        <td>${r['Kelompok Umur'] || ''}</td>
+    <td>${r['Imunisasi'] || ''}</td>
 
-        <td>${r['Status Gizi BB/TB'] || ''}</td>
+    <td>${r['VitaminA'] || ''}</td>
 
-        <td>${r['Status Stunting (TB/U)'] || ''}</td>
+    <td>${r['ObatCacing'] || ''}</td>
 
-        <td>${r['Status TB'] || ''}</td>
+    <td>${r['MTPangan'] || ''}</td>
 
-        <td>${r['Status Gula Darah'] || ''}</td>
+    <td>${r['Edukasi'] || ''}</td>
 
-        <td>${r['Status Tensi'] || ''}</td>
+    <td>${r['GejalaSakit'] || ''}</td>
 
-      </tr>
+    <td>${r['Rujuk'] || ''}</td>
 
-      `;
+  </tr>
 
-      }
+  `;
 
+}
 });
   tbody.innerHTML = html;
 
