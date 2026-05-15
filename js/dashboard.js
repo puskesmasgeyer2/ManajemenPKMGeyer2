@@ -22,6 +22,86 @@ async function loadData(){
 
   }
 
+  // =====================================
+  // HITUNG IMT
+  // =====================================
+
+  function hitungIMT(bb, tb){
+
+    const berat = parseFloat(bb);
+    const tinggi = parseFloat(tb);
+
+    if(!berat || !tinggi) return '';
+
+    const imt =
+    berat / Math.pow(tinggi / 100, 2);
+
+    if(imt < 18.5) return 'Kurus';
+
+    if(imt < 25) return 'Normal';
+
+    if(imt < 30) return 'Gemuk';
+
+    return 'Obesitas';
+
+  }
+
+  // =====================================
+  // HITUNG SKOR PUMA
+  // =====================================
+
+  function hitungSkorPUMA(r){
+
+      let skor = 0;
+
+      // UMUR >= 40
+      if(parseFloat(r['Umur']) >= 40){
+      skor += 1;
+      }
+
+      // MEROKOK
+      if(
+      String(r['Merokok'] || '')
+      .toUpperCase() === 'YA'
+      ){
+      skor += 1;
+      }
+
+      // SESAK NAPAS
+      if(
+      String(r['Dewasa_Napas'] || '')
+      .toUpperCase() === 'YA'
+      ){
+      skor += 1;
+      }
+
+      // BATUK
+      if(
+      String(r['Dewasa_Batuk'] || '')
+      .toUpperCase() === 'YA'
+      ){
+      skor += 1;
+      }
+
+      return skor;
+
+  }
+
+// =====================================
+// STATUS PUMA
+// =====================================
+
+function statusPUMA(r){
+
+  const skor = hitungSkorPUMA(r);
+
+  if(skor >= 6){
+    return 'Tinggi';
+  }
+
+  return 'Normal';
+
+}
   // FETCH API
   const res = await fetch(API_URL);
 
@@ -199,7 +279,7 @@ function renderTable(data){
 
       <td>${r.NIK || ''}</td>
 
-      <td>${r['Status IMT'] || ''}</td>
+      <td>${hitungIMT(r['BB'], r['TB'])}</td>
 
       <td>${r['LingkarPerut'] || ''}</td>
 
@@ -211,13 +291,9 @@ function renderTable(data){
 
       <td>${r['Status Kolesterol'] || ''}</td>
 
-      <td>${r['Skor PUMA'] || ''}</td>
-
-      <td>${
-        Number(r['Skor PUMA']) >= 6
-        ? 'Tinggi'
-        : 'Normal'
-      }</td>
+      <td>${statusPUMA(r)}</td>
+      
+      <td>${hitungSkorPUMA(r)}</td>
 
       <td>${r['Edukasi'] || ''}</td>
 
@@ -1300,29 +1376,28 @@ function renderRekapDewasa(data){
     // ======================
 
     const kurus =
-      d.filter(x =>
-        String(x['Status IMT'] || '')
-        .includes('Kurus')
-      ).length;
+    d.filter(x =>
+    hitungIMT(x['BB'], x['TB'])
+    === 'Kurus'
+    ).length;
 
     const normal =
-      d.filter(x =>
-        String(x['Status IMT'] || '')
-        .toUpperCase()
-        .includes('NORMAL')
-      ).length;
+    d.filter(x =>
+    hitungIMT(x['BB'], x['TB'])
+    === 'Normal'
+    ).length;
 
     const gemuk =
-      d.filter(x =>
-        String(x['Status IMT'] || '')
-        .includes('Gemuk')
-      ).length;
+    d.filter(x =>
+    hitungIMT(x['BB'], x['TB'])
+    === 'Gemuk'
+    ).length;
 
     const obesitas =
-      d.filter(x =>
-        String(x['Status IMT'] || '')
-        .includes('Obesitas')
-      ).length;
+    d.filter(x =>
+    hitungIMT(x['BB'], x['TB'])
+    === 'Obesitas'
+    ).length;
 
     // ======================
     // LINGKAR PERUT
@@ -1447,14 +1522,14 @@ function renderRekapDewasa(data){
     // ======================
 
     const pumaNormal =
-      d.filter(x =>
-        Number(x['Skor PUMA']) < 6
-      ).length;
+    d.filter(x =>
+    statusPUMA(x) === 'Normal'
+    ).length;
 
     const pumaTinggi =
-      d.filter(x =>
-        Number(x['Skor PUMA']) >= 6
-      ).length;
+    d.filter(x =>
+    statusPUMA(x) === 'Tinggi'
+    ).length;
 
     // ======================
     // EDUKASI
