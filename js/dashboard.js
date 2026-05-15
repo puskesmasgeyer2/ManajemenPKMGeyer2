@@ -413,6 +413,38 @@ function renderTable(data){
 
   }
 
+    // =========================
+    // TABEL DASHBOARD
+    // =========================
+
+    else if(currentPage.includes('DASHBOARD')){
+
+    html += `
+
+    <tr>
+
+        <td>${r.Nama || ''}</td>
+
+        <td>${r.NIK || ''}</td>
+
+        <td>${r['Kelompok Umur'] || ''}</td>
+
+        <td>${r['Status Gizi BB/TB'] || ''}</td>
+
+        <td>${r['Status Stunting (TB/U)'] || ''}</td>
+
+        <td>${r['Status TB'] || ''}</td>
+
+        <td>${r['Status Gula Darah'] || ''}</td>
+
+        <td>${r['Status Tensi'] || ''}</td>
+
+      </tr>
+
+      `;
+
+      }
+
 });
   tbody.innerHTML = html;
 
