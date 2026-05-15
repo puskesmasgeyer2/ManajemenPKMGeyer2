@@ -42,15 +42,18 @@ function hitungSkorPUMA(r){
   // UMUR
   // =========================
 
-  const umur =
-    parseFloat(r['Umur (Bulan)']) || 0;
+  const umurBulan =
+  parseFloat(r['Umur (Bulan)']) || 0;
 
-  if(umur >= 50 && umur <= 59){
-    skor += 1;
+  const umurTahun =
+  umurBulan / 12;
+
+  if(umurTahun >= 50 && umurTahun <= 59){
+  skor += 1;
   }
 
-  else if(umur >= 60){
-    skor += 2;
+  else if(umurTahun >= 60){
+  skor += 2;
   }
 
   // =========================
