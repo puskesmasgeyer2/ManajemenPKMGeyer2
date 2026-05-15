@@ -6,22 +6,6 @@ const rowsPerPageRekap = 10;
 
 let allData = [];
 
-async function loadData(){
-
-  // CEK CACHE
-  const cache =
-    localStorage.getItem('posyandu_data');
-
-  if(cache){
-
-    allData = JSON.parse(cache);
-
-    fillFilters(allData);
-
-    return;
-
-  }
-
   // =====================================
   // HITUNG IMT
   // =====================================
@@ -138,7 +122,7 @@ function hitungSkorPUMA(r){
   return skor;
 
 }
-  
+
 // =====================================
 // STATUS PUMA
 // =====================================
@@ -154,6 +138,23 @@ function statusPUMA(r){
   return 'Normal';
 
 }
+
+async function loadData(){
+
+  // CEK CACHE
+  const cache =
+    localStorage.getItem('posyandu_data');
+
+  if(cache){
+
+    allData = JSON.parse(cache);
+
+    fillFilters(allData);
+
+    return;
+
+  }
+  
   // FETCH API
   const res = await fetch(API_URL);
 
