@@ -348,6 +348,8 @@ function renderTable(data){
       
       <td>${statusPUMA(r)}</td>
 
+      <td>${r['Status TB'] || ''}</td>
+
       <td>${r['Edukasi'] || ''}</td>
 
       <td>${r['Rujuk'] || ''}</td>
@@ -1585,6 +1587,24 @@ function renderRekapDewasa(data){
     ).length;
 
     // ======================
+    // STATUS TB
+    // ======================
+
+    const tbSuspek =
+      d.filter(x =>
+        String(x['Status TB'] || '')
+        .trim()
+        .toUpperCase() === 'SUSPEK TB'
+      ).length;
+
+    const tbTidak =
+      d.filter(x =>
+        String(x['Status TB'] || '')
+        .trim()
+        .toUpperCase() === 'TIDAK SUSPEK'
+      ).length;
+
+    // ======================
     // EDUKASI
     // ======================
 
@@ -1635,6 +1655,9 @@ function renderRekapDewasa(data){
 
     <td>${pumaNormal}</td>
     <td>${pumaTinggi}</td>
+
+    <td>${tbSuspek}</td>
+    <td>${tbTidak}</td>
 
     <td>${edukasi}</td>
 
