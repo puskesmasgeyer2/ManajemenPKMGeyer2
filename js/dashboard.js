@@ -276,7 +276,8 @@ if(document.getElementById('totalLansia')){
   currentPage === 'LANSIA'
   ){
     renderRekapDewasa(data);
-    
+}
+  
   destroyCharts();
 
   if(currentPage.includes('DASHBOARD')){
@@ -300,7 +301,6 @@ if(document.getElementById('totalLansia')){
     renderChartTB(data);
 
   }
-
 
 }
 
