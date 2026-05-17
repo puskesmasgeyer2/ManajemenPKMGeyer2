@@ -626,9 +626,7 @@ if(currentPage === 'DEWASA'){
 
     const umur =
       String(
-        x['Kelompok Umur'] ||
-        x['Siklus'] ||
-        ''
+        x['Kelompok Umur'] ||''
       ).toUpperCase();
 
     return umur.includes('DEWASA');
@@ -643,9 +641,7 @@ if(currentPage === 'LANSIA'){
 
     const umur =
       String(
-        x['Kelompok Umur'] ||
-        x['Siklus'] ||
-        ''
+        x['Kelompok Umur'] ||''
       ).toUpperCase();
 
     return umur.includes('LANSIA');
