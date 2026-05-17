@@ -275,6 +275,7 @@ if(document.getElementById('totalLansia')){
   ||
   currentPage === 'LANSIA'
   ){
+    renderRekapDewasa(data);
     
   destroyCharts();
 
