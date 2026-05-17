@@ -270,12 +270,12 @@ if(document.getElementById('totalLansia')){
   
   }
 
-  if(currentPage === 'DEWASA'){
-
-  renderRekapDewasa(data);
-
-  }
-
+  if(
+  currentPage === 'DEWASA'
+  ||
+  currentPage === 'LANSIA'
+  ){
+    
   destroyCharts();
 
   if(currentPage.includes('DASHBOARD')){
@@ -325,7 +325,11 @@ function renderTable(data){
 // TABEL DEWASA
 // =========================
 
-if(currentPage === 'DEWASA'){
+if(
+  currentPage === 'DEWASA'
+  ||
+  currentPage === 'LANSIA'
+){
 
   html += `
 
