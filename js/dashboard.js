@@ -412,6 +412,8 @@ else{
 
     <td>${r.Nama || ''}</td>
 
+    <td>${r.NoKK || ''}</td>
+
     <td>${r.NIK || ''}</td>
 
     <td>${r['ChecklistPerkembangan'] || ''}</td>
