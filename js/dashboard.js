@@ -520,20 +520,85 @@ async function startDashboard(){
 
   await loadData();
 
+  // =========================
   // DASHBOARD SEMUA DATA
+  // =========================
+
   if(currentPage.includes('DASHBOARD')){
+
     renderDashboard(allData);
+
     document.getElementById('loading').style.display = 'none';
+
     return;
+
   }
 
-  // FILTER PER SIKLUS
-  const filtered = allData.filter(item =>
-    item.Siklus &&
-    item.Siklus.toUpperCase() === currentPage
-  );
+  // =========================
+  // FILTER HALAMAN
+  // =========================
+
+  let filtered = [...allData];
+
+  if(currentPage === 'BALITA'){
+
+    filtered = allData.filter(item => {
+
+      const umur = String(
+        item['Kelompok Umur'] || ''
+      ).toUpperCase();
+
+      return umur.includes('BAYI')
+      || umur.includes('BALITA');
+
+    });
+
+  }
+
+  else if(currentPage === 'REMAJA'){
+
+    filtered = allData.filter(item => {
+
+      const umur = String(
+        item['Kelompok Umur'] || ''
+      ).toUpperCase();
+
+      return umur.includes('REMAJA');
+
+    });
+
+  }
+
+  else if(currentPage === 'DEWASA'){
+
+    filtered = allData.filter(item => {
+
+      const umur = String(
+        item['Kelompok Umur'] || ''
+      ).toUpperCase();
+
+      return umur.includes('DEWASA');
+
+    });
+
+  }
+
+  else if(currentPage === 'LANSIA'){
+
+    filtered = allData.filter(item => {
+
+      const umur = String(
+        item['Kelompok Umur'] || ''
+      ).toUpperCase();
+
+      return umur.includes('LANSIA');
+
+    });
+
+  }
 
   renderDashboard(filtered);
+
   document.getElementById('loading').style.display = 'none';
 
 }
