@@ -416,6 +416,8 @@ else{
 
     <td>${r.NIK || ''}</td>
 
+    <td>${r['Kelompok Umur'] || ''}</td>
+
     <td>${r['ChecklistPerkembangan'] || ''}</td>
 
     <td>${r['Status Gizi BB/U'] || ''}</td>
