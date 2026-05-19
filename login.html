@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login Dashboard</title>
+
+<style>
+
+body{
+  font-family:Arial;
+  background:#f4f7f6;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.box{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  width:320px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.1);
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  box-sizing:border-box;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#0f9d58;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.msg{
+  margin-top:10px;
+  color:red;
+  text-align:center;
+}
+
+</style>
+</head>
+<body>
+
+<div class="box">
+
+<h2>Login Dashboard</h2>
+
+<input
+  type="text"
+  id="nip"
+  placeholder="NIP"
+/>
+
+<input
+  type="password"
+  id="password"
+  placeholder="Password"
+/>
+
+<button onclick="login()">
+Login
+</button>
+
+<div class="msg" id="msg"></div>
+
+</div>
+
+<script>
+
+const API =
+'https://script.google.com/macros/s/AKfycbyXOBBho6NOX6QRksfs6JRfm04kbB2553fPueh-WdpseZH5YtJ5bL-Mmbgvw6LUaAlUYA/exec';
+
+async function login(){
+
+  const nip =
+  document.getElementById('nip').value;
+
+  const password =
+  document.getElementById('password').value;
+
+  const res = await fetch(
+    `${API}?api=login&nip=${nip}&password=${password}`
+  );
+
+  const data = await res.json();
+
+  if(data.success){
+
+    localStorage.setItem(
+      'token',
+      data.token
+    );
+
+    localStorage.setItem(
+      'role',
+      data.role
+    );
+
+    window.location.href =
+    'dashboard.html';
+
+  }else{
+
+    document.getElementById('msg')
+    .innerText =
+    data.message;
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
