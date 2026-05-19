@@ -36,19 +36,49 @@ input{
 
 button{
   width:100%;
-  padding:12px;
+  padding:14px;
   border:none;
-  border-radius:10px;
+  border-radius:14px;
   background:#0f9d58;
   color:white;
   font-size:16px;
+  font-weight:600;
   cursor:pointer;
+  transition:0.3s;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+}
+
+button:hover{
+  background:#0c8249;
+}
+
+button:disabled{
+  opacity:0.7;
+  cursor:not-allowed;
 }
 
 .msg{
   margin-top:10px;
   color:red;
   text-align:center;
+}
+
+.spinner{
+  width:18px;
+  height:18px;
+  border:3px solid rgba(255,255,255,0.3);
+  border-top:3px solid white;
+  border-radius:50%;
+  animation:spin 0.8s linear infinite;
+}
+
+@keyframes spin{
+  100%{
+    transform:rotate(360deg);
+  }
 }
 
 </style>
@@ -71,8 +101,22 @@ button{
   placeholder="Password"
 />
 
-<button onclick="login()">
+<button
+  onclick="login()"
+  id="loginBtn"
+>
+
+<span id="btnText">
 Login
+</span>
+
+<span
+  id="loadingIcon"
+  style="display:none;"
+>
+<div class="spinner"></div>
+</span>
+
 </button>
 
 <div class="msg" id="msg"></div>
@@ -86,38 +130,125 @@ const API =
 
 async function login(){
 
+  const btn =
+  document.getElementById('loginBtn');
+
+  const btnText =
+  document.getElementById('btnText');
+
+  const loading =
+  document.getElementById('loadingIcon');
+
+  // ======================
+  // AMBIL INPUT
+  // ======================
+
   const nip =
-  document.getElementById('nip').value;
+  document.getElementById('nip').value.trim();
 
   const password =
-  document.getElementById('password').value;
+  document.getElementById('password').value.trim();
 
-  const res = await fetch(
-    `${API}?api=login&nip=${nip}&password=${password}`
-  );
+  // ======================
+  // VALIDASI
+  // ======================
 
-  const data = await res.json();
-
-  if(data.success){
-
-    localStorage.setItem(
-      'token',
-      data.token
-    );
-
-    localStorage.setItem(
-      'role',
-      data.role
-    );
-
-    window.location.href =
-    'dashboard.html';
-
-  }else{
+  if(!nip || !password){
 
     document.getElementById('msg')
     .innerText =
-    data.message;
+    'NIP dan Password wajib diisi';
+
+    return;
+
+  }
+
+  // ======================
+  // LOCK BUTTON
+  // ======================
+
+  btn.disabled = true;
+
+  btnText.innerText =
+  'Memproses...';
+
+  loading.style.display =
+  'inline-block';
+
+  document.getElementById('msg')
+  .innerText = '';
+
+  try{
+
+    const res = await fetch(
+      `${API}?api=login&nip=${nip}&password=${password}`
+    );
+
+    const data = await res.json();
+
+    // ======================
+    // LOGIN BERHASIL
+    // ======================
+
+    if(data.success){
+
+      btnText.innerText =
+      'Berhasil Login';
+
+      localStorage.setItem(
+        'token',
+        data.token
+      );
+
+      localStorage.setItem(
+        'role',
+        data.role
+      );
+
+      setTimeout(()=>{
+
+        window.location.href =
+        'dashboard.html';
+
+      }, 800);
+
+    }
+
+    // ======================
+    // LOGIN GAGAL
+    // ======================
+
+    else{
+
+      document.getElementById('msg')
+      .innerText =
+      data.message;
+
+      btn.disabled = false;
+
+      btnText.innerText =
+      'Login';
+
+      loading.style.display =
+      'none';
+
+    }
+
+  }
+
+  catch(err){
+
+    document.getElementById('msg')
+    .innerText =
+    'Koneksi gagal';
+
+    btn.disabled = false;
+
+    btnText.innerText =
+    'Login';
+
+    loading.style.display =
+    'none';
 
   }
 
