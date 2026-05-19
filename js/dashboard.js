@@ -382,7 +382,25 @@ else if(currentPage.includes('DASHBOARD')){
 
     <td>${r.NIK || ''}</td>
 
-    <td>${r['Kelompok Umur'] || ''}</td>
+    <td>
+    ${
+    String(r['Kelompok Umur'] || '')
+    .toUpperCase()
+    .includes('BAYI')
+
+    ?
+
+    `<span class="badge badge-bayi">
+      BAYI
+    </span>`
+
+    :
+
+    `<span class="badge badge-balita">
+      BALITA
+    </span>`
+    }
+    </td>
 
     <td>${r['Status Gizi BB/TB'] || ''}</td>
 
