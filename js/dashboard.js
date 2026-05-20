@@ -159,7 +159,12 @@ async function loadData(){
   }
   
   // FETCH API
-  const res = await fetch(API_URL);
+  const token =
+    localStorage.getItem('token');
+
+  const res = await fetch(
+    `${API_URL}&token=${token}`
+  );
 
   allData = await res.json();
 
