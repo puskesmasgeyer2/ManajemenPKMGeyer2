@@ -167,6 +167,17 @@ async function loadData(){
   );
 
   allData = await res.json();
+  // TOKEN INVALID
+  if(allData.success === false){
+
+  localStorage.clear();
+
+  window.location.href =
+  'login.html';
+
+  return;
+
+  }
 
   // SIMPAN CACHE
   localStorage.setItem(
