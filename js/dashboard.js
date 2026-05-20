@@ -454,12 +454,16 @@ else{
 
     <td>${r['ChecklistPerkembangan'] || ''}</td>
 
+    <td>${r['BB'] || ''} kg</td>
     <td>${r['Status Gizi BB/U'] || ''}</td>
 
+    <td>${r['TB'] || ''} cm</td>
     <td>${r['Status Stunting (TB/U)'] || ''}</td>
 
+    <td>${r['LingkarKepala'] || ''} cm</td>
     <td>${r['Status Lingkar Kepala'] || ''}</td>
 
+    <td>${r['LILA'] || ''} cm</td>
     <td>${r['Status LILA'] || ''}</td>
 
     <td>${r['Status TB'] || ''}</td>
