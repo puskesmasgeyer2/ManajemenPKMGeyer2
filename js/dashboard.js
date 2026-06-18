@@ -320,10 +320,21 @@ if(document.getElementById('totalLansia')){
 
 }
 
-// =====================================
-// AMBIL BB SEBELUMNYA
-// BERDASARKAN TANGGAL PELAKSANAAN
-// =====================================
+function parseTanggalIndonesia(str){
+
+  if(!str) return null;
+
+  const p = String(str).split('/');
+
+  if(p.length !== 3) return null;
+
+  return new Date(
+    Number(p[2]),
+    Number(p[1]) - 1,
+    Number(p[0])
+  );
+
+}
 
 function getPreviousBB(currentRow){
 
@@ -332,55 +343,39 @@ function getPreviousBB(currentRow){
 
   if(!nik) return '';
 
-  // =========================
-  // SEMUA RIWAYAT ANAK
-  // =========================
-
-  const riwayat = allData.filter(x =>
-
-    String(x.NIK || '').trim() === nik
-
-  );
-
-  // =========================
-  // URUTKAN BERDASARKAN
-  // TANGGAL PELAKSANAAN
-  // =========================
+  const riwayat =
+    allData.filter(x =>
+      String(x.NIK || '').trim() === nik
+    );
 
   riwayat.sort((a,b)=>{
 
     const da =
-      new Date(a['Tanggal Pelaksanaan']);
+      parseTanggalIndonesia(
+        a['Tanggal Pelaksanaan']
+      );
 
     const db =
-      new Date(b['Tanggal Pelaksanaan']);
+      parseTanggalIndonesia(
+        b['Tanggal Pelaksanaan']
+      );
 
     return da - db;
 
   });
 
-  // =========================
-  // CARI INDEX DATA SEKARANG
-  // =========================
+  const idx =
+    riwayat.findIndex(x =>
 
-  const idx = riwayat.findIndex(x =>
+      String(x['Tanggal Pelaksanaan'])
+      ===
+      String(currentRow['Tanggal Pelaksanaan'])
 
-    String(x['Tanggal Pelaksanaan']) ===
-    String(currentRow['Tanggal Pelaksanaan'])
-
-  );
-
-  // =========================
-  // DATA PERTAMA
-  // =========================
+    );
 
   if(idx <= 0) return '';
 
-  // =========================
-  // AMBIL BB SEBELUMNYA
-  // =========================
-
-  return riwayat[idx - 1]['BB'] || '';
+  return riwayat[idx-1]['BB'];
 
 }
 
