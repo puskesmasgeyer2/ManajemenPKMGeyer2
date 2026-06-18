@@ -320,22 +320,6 @@ if(document.getElementById('totalLansia')){
 
 }
 
-function parseTanggalIndonesia(str){
-
-  if(!str) return null;
-
-  const p = String(str).split('/');
-
-  if(p.length !== 3) return null;
-
-  return new Date(
-    Number(p[2]),
-    Number(p[1]) - 1,
-    Number(p[0])
-  );
-
-}
-
 function getPreviousBB(currentRow){
 
   const nik =
@@ -343,39 +327,71 @@ function getPreviousBB(currentRow){
 
   if(!nik) return '';
 
-  const riwayat =
-    allData.filter(x =>
+  const bulanUrut = {
+    'JANUARI':1,
+    'FEBRUARI':2,
+    'MARET':3,
+    'APRIL':4,
+    'MEI':5,
+    'JUNI':6,
+    'JULI':7,
+    'AGUSTUS':8,
+    'SEPTEMBER':9,
+    'OKTOBER':10,
+    'NOVEMBER':11,
+    'DESEMBER':12
+  };
+
+  const riwayat = allData
+    .filter(x =>
       String(x.NIK || '').trim() === nik
-    );
+    )
+    .sort((a,b)=>{
 
-  riwayat.sort((a,b)=>{
+      const tahunA =
+        parseInt(a.Tahun || 0);
 
-    const da =
-      parseTanggalIndonesia(
-        a['Tanggal Pelaksanaan']
+      const tahunB =
+        parseInt(b.Tahun || 0);
+
+      const bulanA =
+        bulanUrut[
+          String(a.Bulan || '')
+          .toUpperCase()
+        ] || 0;
+
+      const bulanB =
+        bulanUrut[
+          String(b.Bulan || '')
+          .toUpperCase()
+        ] || 0;
+
+      return (
+        (tahunA * 100 + bulanA)
+        -
+        (tahunB * 100 + bulanB)
       );
 
-    const db =
-      parseTanggalIndonesia(
-        b['Tanggal Pelaksanaan']
-      );
-
-    return da - db;
-
-  });
+    });
 
   const idx =
     riwayat.findIndex(x =>
 
-      String(x['Tanggal Pelaksanaan'])
+      String(x.Bulan).trim()
       ===
-      String(currentRow['Tanggal Pelaksanaan'])
+      String(currentRow.Bulan).trim()
+
+      &&
+
+      String(x.Tahun).trim()
+      ===
+      String(currentRow.Tahun).trim()
 
     );
 
   if(idx <= 0) return '';
 
-  return riwayat[idx-1]['BB'];
+  return riwayat[idx - 1].BB || '';
 
 }
 
