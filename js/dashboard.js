@@ -320,6 +320,138 @@ if(document.getElementById('totalLansia')){
 
 }
 
+// =====================================
+// AMBIL BB SEBELUMNYA
+// BERDASARKAN TANGGAL PELAKSANAAN
+// =====================================
+
+function getPreviousBB(currentRow){
+
+  const nik =
+    String(currentRow.NIK || '').trim();
+
+  if(!nik) return '';
+
+  // =========================
+  // SEMUA RIWAYAT ANAK
+  // =========================
+
+  const riwayat = allData.filter(x =>
+
+    String(x.NIK || '').trim() === nik
+
+  );
+
+  // =========================
+  // URUTKAN BERDASARKAN
+  // TANGGAL PELAKSANAAN
+  // =========================
+
+  riwayat.sort((a,b)=>{
+
+    const da =
+      new Date(a['Tanggal Pelaksanaan']);
+
+    const db =
+      new Date(b['Tanggal Pelaksanaan']);
+
+    return da - db;
+
+  });
+
+  // =========================
+  // CARI INDEX DATA SEKARANG
+  // =========================
+
+  const idx = riwayat.findIndex(x =>
+
+    String(x['Tanggal Pelaksanaan']) ===
+    String(currentRow['Tanggal Pelaksanaan'])
+
+  );
+
+  // =========================
+  // DATA PERTAMA
+  // =========================
+
+  if(idx <= 0) return '';
+
+  // =========================
+  // AMBIL BB SEBELUMNYA
+  // =========================
+
+  return riwayat[idx - 1]['BB'] || '';
+
+}
+
+// =====================================
+// HITUNG DELTA BB
+// =====================================
+
+function getDeltaBB(currentRow){
+
+  const bbNow =
+    parseFloat(currentRow['BB']) || 0;
+
+  const bbPrev =
+    parseFloat(
+      getPreviousBB(currentRow)
+    ) || 0;
+
+  if(!bbPrev) return '-';
+
+  const delta =
+    (bbNow - bbPrev).toFixed(1);
+
+  // =========================
+  // NAIK
+  // =========================
+
+  if(delta > 0){
+
+    return `
+      <span style="
+        color:green;
+        font-weight:bold;
+      ">
+        ▲ +${delta}
+      </span>
+    `;
+
+  }
+
+  // =========================
+  // TURUN
+  // =========================
+
+  if(delta < 0){
+
+    return `
+      <span style="
+        color:red;
+        font-weight:bold;
+      ">
+        ▼ ${delta}
+      </span>
+    `;
+
+  }
+
+  // =========================
+  // TETAP
+  // =========================
+
+  return `
+    <span style="
+      color:gray;
+      font-weight:bold;
+    ">
+      0
+    </span>
+  `;
+
+}
+
 function renderTable(data){
 
   const tbody =
