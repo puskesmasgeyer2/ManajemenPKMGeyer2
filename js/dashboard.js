@@ -586,7 +586,9 @@ else{
 
     <td>${r['ChecklistPerkembangan'] || ''}</td>
 
-    <td>${r['BB'] || ''} kg</td>
+    <td>${getPreviousBB(r) || '-'}</td>
+    <td>${r['BB'] || ''}</td>
+    <td>${getDeltaBB(r)}</td>
     <td>${r['Status Gizi BB/U'] || ''}</td>
 
     <td>${r['TB'] || ''} cm</td>
