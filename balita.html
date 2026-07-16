@@ -319,9 +319,36 @@ if(!localStorage.getItem('token')){
 
   <div style="
     display:flex;
-    justify-content:flex-end;
+    justify-content:space-between;
+    align-items:center;
     margin-bottom:15px;
-  ">
+">
+
+    <button id="btnExportExcel"
+        style="
+        background:#198754;
+        color:white;
+        border:none;
+        padding:10px 18px;
+        border-radius:8px;
+        cursor:pointer;
+        font-weight:bold;">
+        📥 Export Excel
+    </button>
+
+    <input
+      type="text"
+      id="searchNama"
+      placeholder="Cari Nama..."
+      style="
+        width:250px;
+        padding:10px;
+        border-radius:10px;
+        border:1px solid #ccc;
+      "
+    >
+
+</div>
 
     <input
       type="text"
