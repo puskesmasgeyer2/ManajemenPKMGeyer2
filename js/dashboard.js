@@ -2152,3 +2152,15 @@ function exportBalitaExcel(){
     URL.revokeObjectURL(url);
 
 }
+
+const btnExport =
+document.getElementById('btnExportExcel');
+
+if(btnExport){
+
+    btnExport.addEventListener(
+        'click',
+        exportBalitaExcel
+    );
+
+}
