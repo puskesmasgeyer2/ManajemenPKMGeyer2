@@ -468,6 +468,8 @@ function renderTable(data){
   const tbody =
     document.querySelector('#tableData tbody');
 
+  window.currentTableData = data;
+
   let html = '';
 
   const start =
@@ -2010,5 +2012,143 @@ if(nextRekap){
     applyFilters();
 
   });
+
+}
+
+function exportBalitaExcel(){
+
+    const data = window.currentTableData || [];
+
+    let html = `
+    <table border="1">
+
+    <tr>
+        <th>Nama</th>
+        <th>No KK</th>
+        <th>NIK</th>
+        <th>Kelompok</th>
+        <th>Checklist</th>
+        <th>BB Sebelumnya</th>
+        <th>BB Sekarang</th>
+        <th>Delta BB</th>
+        <th>Status BB/U</th>
+        <th>TB (cm)</th>
+        <th>Status TB/U</th>
+        <th>LK (cm)</th>
+        <th>Status LK</th>
+        <th>LILA</th>
+        <th>Status LILA</th>
+        <th>Status TB</th>
+        <th>ASI</th>
+        <th>MPASI</th>
+        <th>Imunisasi</th>
+        <th>Vitamin A</th>
+        <th>Obat Cacing</th>
+        <th>MT Lokal</th>
+        <th>Edukasi</th>
+        <th>Gejala Sakit</th>
+        <th>Rujuk</th>
+    </tr>
+    `;
+
+    data.forEach(r=>{
+
+        const bbSebelumnya = getPreviousBB(r) || '-';
+
+        const bbSekarang = r['BB'] || '';
+
+        const delta =
+            (parseFloat(bbSekarang||0)-parseFloat(bbSebelumnya||0));
+
+        html += `
+        <tr>
+
+        <td>${r.Nama||''}</td>
+
+        <td>${r.NoKK||''}</td>
+
+        <td>${r.NIK||''}</td>
+
+        <td>${r['Kelompok Umur']||''}</td>
+
+        <td>${r['ChecklistPerkembangan']||''}</td>
+
+        <td>${bbSebelumnya}</td>
+
+        <td>${bbSekarang}</td>
+
+        <td>${isNaN(delta)?'-':delta.toFixed(1)}</td>
+
+        <td>${r['Status Gizi BB/U']||''}</td>
+
+        <td>${r['TB']||''}</td>
+
+        <td>${r['Status Stunting (TB/U)']||''}</td>
+
+        <td>${r['LingkarKepala']||''}</td>
+
+        <td>${r['Status Lingkar Kepala']||''}</td>
+
+        <td>${r['LILA']||''}</td>
+
+        <td>${r['Status LILA']||''}</td>
+
+        <td>${r['Status TB']||''}</td>
+
+        <td>${r['ASI']||''}</td>
+
+        <td>${r['MPASI']||''}</td>
+
+        <td>${r['Imunisasi']||''}</td>
+
+        <td>${r['VitaminA']||''}</td>
+
+        <td>${r['ObatCacing']||''}</td>
+
+        <td>${r['MTPangan']||''}</td>
+
+        <td>${r['Edukasi']||''}</td>
+
+        <td>${r['GejalaSakit']||''}</td>
+
+        <td>${r['Rujuk']||''}</td>
+
+        </tr>
+        `;
+
+    });
+
+    html += "</table>";
+
+    const blob = new Blob(
+        [html],
+        {
+            type:'application/vnd.ms-excel'
+        }
+    );
+
+    const url =
+    URL.createObjectURL(blob);
+
+    const a =
+    document.createElement('a');
+
+    const bulan =
+    document.getElementById('filterBulan').value || 'Semua';
+
+    const desa =
+    document.getElementById('filterDesa').value || 'Semua';
+
+    const pos =
+    document.getElementById('filterPosyandu').value || 'Semua';
+
+    a.href = url;
+
+    a.download =
+    `Balita_${bulan}_${desa}_${pos}.xls`;
+
+    a.click();
+
+    URL.revokeObjectURL(url);
 
 }
