@@ -2015,24 +2015,29 @@ if(nextRekap){
 
 }
 
+function stripHtml(text){
+
+    return String(text)
+        .replace(/<[^>]+>/g,'')
+        .trim();
+
+}
+
 function exportBalitaExcel(){
 
-    if(!filteredBalita.length){
+    const data = window.currentTableData || [];
+
+    if(data.length===0){
+
         alert("Tidak ada data.");
+
         return;
+
     }
 
-    const bulan =
-        document.getElementById("filterBulan").value || "Semua";
-
-    const desa =
-        document.getElementById("filterDesa").value || "Semua";
-
-    const posyandu =
-        document.getElementById("filterPosyandu").value || "Semua";
-
-    const tanggalCetak =
-        new Date().toLocaleDateString("id-ID");
+    const bulan=document.getElementById("filterBulan").value || "Semua";
+    const desa=document.getElementById("filterDesa").value || "Semua";
+    const posyandu=document.getElementById("filterPosyandu").value || "Semua";
 
     const rows=[];
 
@@ -2043,8 +2048,7 @@ function exportBalitaExcel(){
     rows.push(["Bulan",bulan]);
     rows.push(["Desa",desa]);
     rows.push(["Posyandu",posyandu]);
-    rows.push(["Tanggal Cetak",tanggalCetak]);
-    rows.push(["Jumlah Data",filteredBalita.length]);
+    rows.push(["Jumlah Data",data.length]);
     rows.push([]);
 
     rows.push([
@@ -2057,9 +2061,9 @@ function exportBalitaExcel(){
         "BB Sekarang",
         "Δ BB",
         "Status BB/U",
-        "TB (cm)",
+        "TB",
         "Status TB/U",
-        "LK (cm)",
+        "LK",
         "Status LK",
         "LILA",
         "Status LILA",
@@ -2075,7 +2079,7 @@ function exportBalitaExcel(){
         "Rujuk"
     ]);
 
-    filteredBalita.forEach(r=>{
+    data.forEach(r=>{
 
         rows.push([
 
@@ -2085,49 +2089,49 @@ function exportBalitaExcel(){
 
             "'" + (r.NIK || ""),
 
-            r.Kelompok,
+            r["Kelompok Umur"],
 
-            r.ChecklistPerkembangan,
+            r["ChecklistPerkembangan"],
 
-            r.BBSebelumnya,
+            getPreviousBB(r),
 
-            r.BBSekarang,
+            r["BB"],
 
-            r.DeltaBB,
+            stripHtml(getDeltaBB(r)),
 
-            r.StatusBBU,
+            r["Status Gizi BB/U"],
 
-            r.TB,
+            r["TB"],
 
-            r.StatusTBU,
+            r["Status Stunting (TB/U)"],
 
-            r.LK,
+            r["LingkarKepala"],
 
-            r.StatusLK,
+            r["Status Lingkar Kepala"],
 
-            r.LILA,
+            r["LILA"],
 
-            r.StatusLILA,
+            r["Status LILA"],
 
-            r.StatusTB,
+            r["Status TB"],
 
-            r.ASI,
+            r["ASI"],
 
-            r.MPASI,
+            r["MPASI"],
 
-            r.Imunisasi,
+            r["Imunisasi"],
 
-            r.VitA,
+            r["VitaminA"],
 
-            r.ObatCacing,
+            r["ObatCacing"],
 
-            r.MTLokal,
+            r["MTPangan"],
 
-            r.Edukasi,
+            r["Edukasi"],
 
-            r.GejalaSakit,
+            r["GejalaSakit"],
 
-            r.Rujuk
+            r["Rujuk"]
 
         ]);
 
@@ -2138,64 +2142,35 @@ function exportBalitaExcel(){
     const ws=XLSX.utils.aoa_to_sheet(rows);
 
     ws["!cols"]=[
-
-        {wch:32},
-
+        {wch:30},
         {wch:22},
-
         {wch:22},
-
+        {wch:15},
         {wch:18},
-
-        {wch:20},
-
+        {wch:12},
+        {wch:12},
+        {wch:10},
+        {wch:18},
+        {wch:10},
+        {wch:18},
+        {wch:10},
+        {wch:18},
+        {wch:10},
+        {wch:18},
         {wch:14},
-
+        {wch:10},
+        {wch:10},
+        {wch:12},
+        {wch:10},
+        {wch:12},
+        {wch:12},
         {wch:14},
-
-        {wch:12},
-
-        {wch:16},
-
-        {wch:10},
-
-        {wch:16},
-
-        {wch:10},
-
-        {wch:18},
-
-        {wch:10},
-
-        {wch:16},
-
-        {wch:12},
-
-        {wch:10},
-
-        {wch:10},
-
-        {wch:12},
-
-        {wch:10},
-
-        {wch:12},
-
-        {wch:12},
-
-        {wch:18},
-
-        {wch:18},
-
+        {wch:14},
         {wch:12}
-
     ];
 
     XLSX.utils.book_append_sheet(wb,ws,"Balita");
 
-    XLSX.writeFile(
-        wb,
-        `Balita_${bulan}_${desa}_${posyandu}.xlsx`
-    );
+    XLSX.writeFile(wb,"Laporan Balita.xlsx");
 
 }
