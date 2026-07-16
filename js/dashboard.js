@@ -2174,3 +2174,11 @@ function exportBalitaExcel(){
     XLSX.writeFile(wb,"Laporan Balita.xlsx");
 
 }
+
+const btn=document.getElementById("btnExportExcel");
+
+if(btn){
+
+    btn.onclick=exportBalitaExcel;
+
+}
