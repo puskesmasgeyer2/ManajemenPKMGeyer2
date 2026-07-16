@@ -2017,150 +2017,185 @@ if(nextRekap){
 
 function exportBalitaExcel(){
 
-    const data = window.currentTableData || [];
+    if(!filteredBalita.length){
+        alert("Tidak ada data.");
+        return;
+    }
 
-    let html = `
-    <table border="1">
+    const bulan =
+        document.getElementById("filterBulan").value || "Semua";
 
-    <tr>
-        <th>Nama</th>
-        <th>No KK</th>
-        <th>NIK</th>
-        <th>Kelompok</th>
-        <th>Checklist</th>
-        <th>BB Sebelumnya</th>
-        <th>BB Sekarang</th>
-        <th>Delta BB</th>
-        <th>Status BB/U</th>
-        <th>TB (cm)</th>
-        <th>Status TB/U</th>
-        <th>LK (cm)</th>
-        <th>Status LK</th>
-        <th>LILA</th>
-        <th>Status LILA</th>
-        <th>Status TB</th>
-        <th>ASI</th>
-        <th>MPASI</th>
-        <th>Imunisasi</th>
-        <th>Vitamin A</th>
-        <th>Obat Cacing</th>
-        <th>MT Lokal</th>
-        <th>Edukasi</th>
-        <th>Gejala Sakit</th>
-        <th>Rujuk</th>
-    </tr>
-    `;
+    const desa =
+        document.getElementById("filterDesa").value || "Semua";
 
-    data.forEach(r=>{
+    const posyandu =
+        document.getElementById("filterPosyandu").value || "Semua";
 
-        const bbSebelumnya = getPreviousBB(r) || '-';
+    const tanggalCetak =
+        new Date().toLocaleDateString("id-ID");
 
-        const bbSekarang = r['BB'] || '';
+    const rows=[];
 
-        const delta =
-            (parseFloat(bbSekarang||0)-parseFloat(bbSebelumnya||0));
+    rows.push(["UPTD PUSKESMAS GEYER II"]);
+    rows.push(["LAPORAN POSYANDU ILP BALITA"]);
+    rows.push([]);
 
-        html += `
-        <tr>
+    rows.push(["Bulan",bulan]);
+    rows.push(["Desa",desa]);
+    rows.push(["Posyandu",posyandu]);
+    rows.push(["Tanggal Cetak",tanggalCetak]);
+    rows.push(["Jumlah Data",filteredBalita.length]);
+    rows.push([]);
 
-        <td>${r.Nama||''}</td>
+    rows.push([
+        "Nama",
+        "No KK",
+        "NIK",
+        "Kelompok",
+        "Checklist",
+        "BB Sebelumnya",
+        "BB Sekarang",
+        "Δ BB",
+        "Status BB/U",
+        "TB (cm)",
+        "Status TB/U",
+        "LK (cm)",
+        "Status LK",
+        "LILA",
+        "Status LILA",
+        "Status TB",
+        "ASI",
+        "MPASI",
+        "Imunisasi",
+        "Vitamin A",
+        "Obat Cacing",
+        "MT Lokal",
+        "Edukasi",
+        "Gejala Sakit",
+        "Rujuk"
+    ]);
 
-        <td>${r.NoKK||''}</td>
+    filteredBalita.forEach(r=>{
 
-        <td>${r.NIK||''}</td>
+        rows.push([
 
-        <td>${r['Kelompok Umur']||''}</td>
+            r.Nama,
 
-        <td>${r['ChecklistPerkembangan']||''}</td>
+            "'" + (r.NoKK || ""),
 
-        <td>${bbSebelumnya}</td>
+            "'" + (r.NIK || ""),
 
-        <td>${bbSekarang}</td>
+            r.Kelompok,
 
-        <td>${isNaN(delta)?'-':delta.toFixed(1)}</td>
+            r.ChecklistPerkembangan,
 
-        <td>${r['Status Gizi BB/U']||''}</td>
+            r.BBSebelumnya,
 
-        <td>${r['TB']||''}</td>
+            r.BBSekarang,
 
-        <td>${r['Status Stunting (TB/U)']||''}</td>
+            r.DeltaBB,
 
-        <td>${r['LingkarKepala']||''}</td>
+            r.StatusBBU,
 
-        <td>${r['Status Lingkar Kepala']||''}</td>
+            r.TB,
 
-        <td>${r['LILA']||''}</td>
+            r.StatusTBU,
 
-        <td>${r['Status LILA']||''}</td>
+            r.LK,
 
-        <td>${r['Status TB']||''}</td>
+            r.StatusLK,
 
-        <td>${r['ASI']||''}</td>
+            r.LILA,
 
-        <td>${r['MPASI']||''}</td>
+            r.StatusLILA,
 
-        <td>${r['Imunisasi']||''}</td>
+            r.StatusTB,
 
-        <td>${r['VitaminA']||''}</td>
+            r.ASI,
 
-        <td>${r['ObatCacing']||''}</td>
+            r.MPASI,
 
-        <td>${r['MTPangan']||''}</td>
+            r.Imunisasi,
 
-        <td>${r['Edukasi']||''}</td>
+            r.VitA,
 
-        <td>${r['GejalaSakit']||''}</td>
+            r.ObatCacing,
 
-        <td>${r['Rujuk']||''}</td>
+            r.MTLokal,
 
-        </tr>
-        `;
+            r.Edukasi,
+
+            r.GejalaSakit,
+
+            r.Rujuk
+
+        ]);
 
     });
 
-    html += "</table>";
+    const wb=XLSX.utils.book_new();
 
-    const blob = new Blob(
-        [html],
-        {
-            type:'application/vnd.ms-excel'
-        }
-    );
+    const ws=XLSX.utils.aoa_to_sheet(rows);
 
-    const url =
-    URL.createObjectURL(blob);
+    ws["!cols"]=[
 
-    const a =
-    document.createElement('a');
+        {wch:32},
 
-    const bulan =
-    document.getElementById('filterBulan').value || 'Semua';
+        {wch:22},
 
-    const desa =
-    document.getElementById('filterDesa').value || 'Semua';
+        {wch:22},
 
-    const pos =
-    document.getElementById('filterPosyandu').value || 'Semua';
+        {wch:18},
 
-    a.href = url;
+        {wch:20},
 
-    a.download =
-    `Balita_${bulan}_${desa}_${pos}.xls`;
+        {wch:14},
 
-    a.click();
+        {wch:14},
 
-    URL.revokeObjectURL(url);
+        {wch:12},
 
-}
+        {wch:16},
 
-const btnExport =
-document.getElementById('btnExportExcel');
+        {wch:10},
 
-if(btnExport){
+        {wch:16},
 
-    btnExport.addEventListener(
-        'click',
-        exportBalitaExcel
+        {wch:10},
+
+        {wch:18},
+
+        {wch:10},
+
+        {wch:16},
+
+        {wch:12},
+
+        {wch:10},
+
+        {wch:10},
+
+        {wch:12},
+
+        {wch:10},
+
+        {wch:12},
+
+        {wch:12},
+
+        {wch:18},
+
+        {wch:18},
+
+        {wch:12}
+
+    ];
+
+    XLSX.utils.book_append_sheet(wb,ws,"Balita");
+
+    XLSX.writeFile(
+        wb,
+        `Balita_${bulan}_${desa}_${posyandu}.xlsx`
     );
 
 }
